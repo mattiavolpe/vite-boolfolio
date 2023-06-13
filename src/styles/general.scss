@@ -26,6 +26,30 @@ body {
     box-shadow: -2px 2px 7px 0 #5DDA5D;
   }
 
+  .portfolio_pagination {
+
+    a {
+      text-decoration: none;
+      padding: 0.25rem 0.5rem;
+      border: 1px solid #5DDA5D;
+      cursor: pointer;
+
+      &.unclickable {
+        cursor: not-allowed;
+      }
+    }
+
+    a:first-child {
+      border-top-left-radius: 0.5rem;
+      border-bottom-left-radius: 0.5rem;
+    }
+
+    a:last-child {
+      border-top-right-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
+    }
+  }
+
   header {
     z-index: 1;
 

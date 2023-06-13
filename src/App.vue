@@ -21,7 +21,6 @@ export default {
             lastPageUrl: "",
             prevPageUrl: "",
             nextPageUrl: "",
-            links: [],
         }
     },
     methods: {
@@ -35,7 +34,6 @@ export default {
                 this.lastPageUrl = response.data.projects.last_page_url;
                 this.prevPageUrl = response.data.projects.prev_page_url;
                 this.nextPageUrl = response.data.projects.next_page_url;
-                this.links = response.data.projects.links;
             })
             .catch(error => {
                 console.error(error);
@@ -94,7 +92,7 @@ export default {
                 if(currentPage === 1) {
                     return "";
                 } else if(currentPage < this.pages) {
-                    this.getProjects(this.host + this.projectsEndpoint + '?page=' + (currentPage - 1));
+                    this.getProjects(this.prevPageUrl);
                     return;
                 } else {
                     this.getProjects(this.host + this.projectsEndpoint + '?page=' + (currentPage - 2));
@@ -117,7 +115,7 @@ export default {
                     this.getProjects(this.host + this.projectsEndpoint + '?page=3');
                     return;
                 } else {
-                    this.getProjects(this.host + this.projectsEndpoint + '?page=' + (currentPage + 1));
+                    this.getProjects(this.nextPageUrl);
                     return;
                 }
             }

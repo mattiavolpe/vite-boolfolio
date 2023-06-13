@@ -1,15 +1,19 @@
 <script>
-import axios from "axios"
+import axios from "axios";
+import AppHeader from "./components/AppHeader.vue";
+import ProjectCard from "./components/ProjectCard.vue";
 
 export default {
     name: "App",
     components: {
-
+        AppHeader,
+        ProjectCard,
     },
     data() {
         return {
             host: "http://127.0.0.1:8000/",
             projectsEndpoint: "api/projects",
+            imagesPath: "storage/",
             projects: [],
         }
     },
@@ -18,7 +22,8 @@ export default {
     },
     mounted() {
         const fullUrl = this.host + this.projectsEndpoint;
-        axios.get(fullUrl)
+        axios
+        .get(fullUrl)
         .then(response => {
             this.projects = response.data.projects.data;
         })
@@ -30,14 +35,11 @@ export default {
 </script>
 
 <template>
-    <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 g-4">
+    <AppHeader/>
+    <div class="container py-5">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
             <div class="col" v-for="project in projects">
-                <div class="card">
-                    <div class="card-header">
-                        {{ project.name }}
-                    </div>
-                </div>
+                <ProjectCard :project="project" :host="host" :imagesPath="imagesPath"/>
             </div>
         </div>
     </div>

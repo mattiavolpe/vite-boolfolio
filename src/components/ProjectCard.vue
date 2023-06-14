@@ -31,10 +31,11 @@ export default {
       </h6>
       <template v-if="project.technologies">
         <h6 class="text_custom_green fw-bold mb-0">./Used technologies:</h6>
-        <ul class="text_custom_green fw-bold list-unstyled"> 
+        <ul class="text_custom_green fw-bold list-unstyled mb-0"> 
           <li class="text-white fw-normal" v-for="technology in project.technologies">{{ technology.name }}</li>
         </ul>
       </template>
     </div>
+    <router-link class="mx-3 mb-3 text-center text-white rounded px-3 py-1 text-decoration-none fw-bold border_custom_green bg_custom_green" :to="{ name: 'singleProject', params: {slug: project.slug}}">PROJECT DETAILS</router-link>
   </div>
 </template>

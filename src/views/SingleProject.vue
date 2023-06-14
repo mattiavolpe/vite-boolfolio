@@ -34,7 +34,7 @@ export default {
   <div class="container py-5" v-if="project">
     <h1 class="text-center text_custom_green mb-0">{{ project.name }}</h1>
     <div class="text-center py-4">
-      <img class="img-fluid" :src="host + imagesPath + project.image" alt="">
+      <img class="img-fluid" :src="host + imagesPath + project.image" :alt="`${project.name} image`">
     </div>
     <template v-if="project.repositoryUrl">
         <h3 class="text_custom_green fw-bold mb-0">./Repository URL:</h3>

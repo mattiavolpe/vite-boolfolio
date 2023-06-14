@@ -12,7 +12,7 @@ export default {
 <template>
   <div class="card border-0 bg-black box_shadow_custom_green h-100">
     <router-link :to="{ name: 'singleProject', params: {slug: project.slug} }">
-      <img class="card-img-top" :src="host + imagesPath + project.image">
+      <img class="card-img-top" :src="host + imagesPath + project.image" :alt="`${project.name} image`">
     </router-link>
     <div class="card-header text-center showcase_project_title">
       <router-link class="text-decoration-none" :to="{ name: 'singleProject', params: {slug: project.slug} }">

@@ -1,12 +1,14 @@
 <script>
 import axios from "axios";
 import ProjectCard from "../components/ProjectCard.vue";
+import PageLoader from "../components/PageLoader.vue";
 
 export default {
     name: "AppHome",
     components: {
-        ProjectCard,
-    },
+    ProjectCard,
+    PageLoader,
+},
     data() {
         return {
             host: "http://127.0.0.1:8000/",
@@ -19,6 +21,7 @@ export default {
             lastPageUrl: "",
             prevPageUrl: "",
             nextPageUrl: "",
+            loading: true,
         }
     },
     methods: {
@@ -32,6 +35,7 @@ export default {
                 this.lastPageUrl = response.data.projects.last_page_url;
                 this.prevPageUrl = response.data.projects.prev_page_url;
                 this.nextPageUrl = response.data.projects.next_page_url;
+                this.loading = false;
             })
             .catch(error => {
                 console.error(error.message);
@@ -128,11 +132,14 @@ export default {
 
 <template>
   <div class="container py-5">
-    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4" v-if="!loading">
         <div class="col" v-for="project in projects">
             <ProjectCard :project="project" :host="host" :imagesPath="imagesPath"/>
         </div>
     </div>
+    <PageLoader v-else>
+        LOADING PROJECTS...
+    </PageLoader>
     <div class="text-end py-4 portfolio_pagination" v-if="pages >= 3">
         <a @click="currentPage === 1 ? '' : getProjects(firstPageUrl)" :class="currentPage === 1 ? 'bg-black text-secondary unclickable' : 'bg-black text_custom_green'">First</a>
         <a @click="currentPage === 1 ? '' : getProjects(prevPageUrl)" :class="currentPage === 1 ? 'bg-black text-secondary unclickable' : 'bg-black text_custom_green'">Prev</a>

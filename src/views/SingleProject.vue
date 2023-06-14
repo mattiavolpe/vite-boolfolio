@@ -1,37 +1,42 @@
 <script>
 import axios from 'axios';
+import PageLoader from '../components/PageLoader.vue';
 
 export default {
-  name: "SingleProject",
-  data() {
-    return {
-      host: "http://127.0.0.1:8000/",
-      projectsEndpoint: "api/projects",
-      imagesPath: "storage/",
-      project: null,
-    }
-  },
-  mounted() {
-    axios
-    .get(this.host + this.projectsEndpoint + "/" + this.$route.params.slug)
-    .then(response => {
-      if(response.data.success) {
-        this.project = response.data.project;
-      } else {
-        this.$router.push({
-          name: 'page404'
+    name: "SingleProject",
+    components: {
+      PageLoader,
+    },
+    data() {
+        return {
+            host: "http://127.0.0.1:8000/",
+            projectsEndpoint: "api/projects",
+            imagesPath: "storage/",
+            project: null,
+        };
+    },
+    mounted() {
+        axios
+            .get(this.host + this.projectsEndpoint + "/" + this.$route.params.slug)
+            .then(response => {
+            if (response.data.success) {
+                this.project = response.data.project;
+            }
+            else {
+                this.$router.push({
+                    name: "page404"
+                });
+            }
+        })
+            .catch(error => {
+            console.error(error.message);
         });
-      }
-    })
-    .catch(error => {
-      console.error(error.message);
-    })
-  }
+    },
 }
 </script>
 
 <template>
-  <div class="container py-5" v-if="project">
+  <div class="container py-5" v-if="project && !loading">
     <h1 class="text-center text_custom_green mb-0">{{ project.name }}</h1>
     <div class="text-center py-4">
       <img class="img-fluid" :src="host + imagesPath + project.image" :alt="`${project.name} image`">
@@ -52,4 +57,7 @@ export default {
         </ul>
       </template>
   </div>
+  <PageLoader v-else>
+    LOADING PROJECT DETAILS...
+  </PageLoader>
 </template>

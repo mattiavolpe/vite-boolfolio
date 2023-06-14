@@ -14,7 +14,7 @@ export default {
   mounted() {
     axios
     .get(this.host + this.projectsEndpoint + "/" + this.$route.params.slug)
-    .then(response=> {
+    .then(response => {
       if(response.data.success) {
         this.project = response.data.project;
       } else {
@@ -22,6 +22,9 @@ export default {
           name: 'page404'
         });
       }
+    })
+    .catch(error => {
+      console.error(error.message);
     })
   }
 }

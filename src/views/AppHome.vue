@@ -34,7 +34,7 @@ export default {
                 this.nextPageUrl = response.data.projects.next_page_url;
             })
             .catch(error => {
-                console.error(error);
+                console.error(error.message);
             })
         },
         getPaginationLabel(currentPage, paginationElement) {

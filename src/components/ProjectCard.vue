@@ -11,9 +11,13 @@ export default {
 
 <template>
   <div class="card border-0 bg-black box_shadow_custom_green h-100">
-    <img class="card-img-top" :src="host + imagesPath + project.image">
+    <router-link :to="{ name: 'singleProject', params: {slug: project.slug} }">
+      <img class="card-img-top" :src="host + imagesPath + project.image">
+    </router-link>
     <div class="card-header text-center showcase_project_title">
-      <h4 class="mb-0 fw-bold text_custom_green">{{ project.name }}</h4>
+      <router-link class="text-decoration-none" :to="{ name: 'singleProject', params: {slug: project.slug} }">
+        <h4 class="mb-0 fw-bold text_custom_green">{{ project.name }}</h4>
+      </router-link>
     </div>
     <div class="card-body">
       <template v-if="project.repositoryUrl">

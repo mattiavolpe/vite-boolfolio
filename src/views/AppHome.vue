@@ -2,6 +2,7 @@
 import axios from "axios";
 import ProjectCard from "../components/ProjectCard.vue";
 import PageLoader from "../components/PageLoader.vue";
+import { nextTick } from "vue";
 
 export default {
     name: "AppHome",
@@ -36,6 +37,7 @@ export default {
                 this.prevPageUrl = response.data.projects.prev_page_url;
                 this.nextPageUrl = response.data.projects.next_page_url;
                 this.loading = false;
+                nextTick(window.scrollTo(0, 0));
             })
             .catch(error => {
                 console.error(error.message);

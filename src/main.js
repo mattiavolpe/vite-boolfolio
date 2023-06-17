@@ -5,4 +5,11 @@ import { router } from './router.js'
 // Import all of Bootstrap's JS
 import * as bootstrap from 'bootstrap'
 
-createApp(App).use(router).mount('#app')
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faBars)
+
+createApp(App).component('font-awesome-icon', FontAwesomeIcon).use(router).mount('#app')

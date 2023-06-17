@@ -1,0 +1,22 @@
+header {
+  z-index: 1;
+  box-shadow: 0 0 0.5rem 3px #1e1e1e;
+
+  nav {
+    .navbar-toggler:focus {
+      box-shadow: none;
+    }
+
+    .nav-link {
+      padding: 1rem !important;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    li:last-child .nav-link {
+      padding-right: 0 !important;
+    }
+  }
+}

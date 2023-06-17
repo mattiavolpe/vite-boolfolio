@@ -1,11 +1,13 @@
 <script>
+import AppJumbotron from '../components/AppJumbotron.vue';
 export default {
-    name: "AppHome",
+  name: "AppHome",
+  components: {
+    AppJumbotron,
+  }
 }
 </script>
 
 <template>
-    <div id="homeJumbotron" class="container">
-
-    </div>
+  <AppJumbotron />
 </template>

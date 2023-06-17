@@ -8,8 +8,8 @@ import * as bootstrap from 'bootstrap'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faBars)
+library.add(faBars, faChevronDown)
 
 createApp(App).component('font-awesome-icon', FontAwesomeIcon).use(router).mount('#app')

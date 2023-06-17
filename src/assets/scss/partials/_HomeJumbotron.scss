@@ -42,6 +42,10 @@
     background-color: $dark;
     overflow: hidden;
 
+    img {
+      filter: drop-shadow(0 0 12px $accent);
+    }
+
     &::after {
       content: "";
       position: absolute;

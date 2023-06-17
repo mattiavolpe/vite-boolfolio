@@ -37,7 +37,7 @@ export default {
 
 <template>
   <div class="container py-5" v-if="project && !loading">
-    <h1 class="text-center text_custom_green mb-0">{{ project.name }}</h1>
+    <h1 class="text-center text_custom_green mb-0 fw-bold">{{ project.name }}</h1>
     <div class="text-center py-4">
       <img class="img-fluid" :src="host + imagesPath + project.image" :alt="`${project.name} image`">
     </div>

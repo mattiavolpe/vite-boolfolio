@@ -1,0 +1,6 @@
+@use "./_variables.scss" as *;
+
+#homeJumbotron {
+  height: calc(100vh - 82px);
+  height: calc(100svh - 82px);
+}

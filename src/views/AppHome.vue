@@ -5,4 +5,7 @@ export default {
 </script>
 
 <template>
+    <div id="homeJumbotron" class="container">
+
+    </div>
 </template>

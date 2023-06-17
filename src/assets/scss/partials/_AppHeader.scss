@@ -1,22 +1,32 @@
+@use "./_variables.scss" as *;
+
 header {
   z-index: 1;
-  box-shadow: 0 0 0.5rem 3px #1e1e1e;
+  box-shadow: 0 0 0.5rem 3px $darker;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
 
   nav {
+    img {
+      padding-left: 0.75rem;
+    }
+    
     .navbar-toggler:focus {
       box-shadow: none;
     }
 
-    .nav-link {
-      padding: 1rem !important;
+    .router-link-active {
+      color: $accent;
+      box-shadow: inset 0 -3px 0 0 $accent;
     }
-  }
-}
 
-@media screen and (min-width: 768px) {
-  body {
-    li:last-child .nav-link {
-      padding-right: 0 !important;
+    .nav-link {
+      padding: 0.75rem !important;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus {
+      color: $accent;
     }
   }
 }

@@ -1,26 +1,36 @@
-@use "./partials/AppHeader";
+@use "./partials/_variables.scss" as *;
+@use "./partials/_AppHeader.scss";
+@use "./partials/_AppHome.scss";
 
 // Import all of Bootstrap's CSS
-@import "/node_modules/bootstrap/scss/bootstrap";
+@import "/node_modules/bootstrap/scss/bootstrap.scss";
 
 body {
   font-family: 'Montserrat', sans-serif;
-  background-color: #313131;
-  color: #e1e1e1;
-
-  .text_dark_custom {
-    color: #313131;
-  }
+  background-color: $dark;
+  color: $light;
 
   .text_light_custom {
-    color: #e1e1e1;
+    color: $light;
   }
 
-  .bg_dark_custom {
-    background-color: #313131;
+  .text_dark_custom {
+    color: $dark;
+  }
+
+  .text_accent_custom {
+    color: $accent;
   }
 
   .bg_light_custom {
-    background-color: #e1e1e1;
-  }  
+    background-color: $light;
+  }
+
+  .bg_dark_custom {
+    background-color: $dark;
+  }
+
+  .bg_accent_custom {
+    background-color: $accent;
+  }
 }

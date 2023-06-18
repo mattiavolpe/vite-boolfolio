@@ -1,4 +1,5 @@
 <script>
+import { state } from "../state";
 import axios from "axios";
 import ProjectCard from "../components/ProjectCard.vue";
 import PageLoader from "../components/PageLoader.vue";
@@ -12,9 +13,7 @@ export default {
 },
     data() {
         return {
-            host: "http://127.0.0.1:8000/",
-            projectsEndpoint: "api/projects",
-            imagesPath: "storage/",
+            state,
             projects: [],
             currentPage: 1,
             pages: 1,
@@ -99,15 +98,15 @@ export default {
                     this.getProjects(this.prevPageUrl);
                     return;
                 } else {
-                    this.getProjects(this.host + this.projectsEndpoint + '?page=' + (currentPage - 2));
+                    this.getProjects(state.host + state.projectsEndpoint + '?page=' + (currentPage - 2));
                     return;
                 }
             } else if(paginationElement === 1) {
                 if(currentPage === 1) {
-                    this.getProjects(this.host + this.projectsEndpoint + '?page=2');
+                    this.getProjects(state.host + state.projectsEndpoint + '?page=2');
                     return;
                 } else if(currentPage === this.pages) {
-                    this.getProjects(this.host + this.projectsEndpoint + '?page=' + (this.pages - 1));
+                    this.getProjects(state.host + state.projectsEndpoint + '?page=' + (this.pages - 1));
                     return;
                 } else {
                     return "";
@@ -116,7 +115,7 @@ export default {
                 if(currentPage === this.pages) {
                     return "";
                 } else if(currentPage === 1) {
-                    this.getProjects(this.host + this.projectsEndpoint + '?page=3');
+                    this.getProjects(state.host + state.projectsEndpoint + '?page=3');
                     return;
                 } else {
                     this.getProjects(this.nextPageUrl);
@@ -126,7 +125,7 @@ export default {
         }
     },
     mounted() {
-        const fullUrl = this.host + this.projectsEndpoint;
+        const fullUrl = state.host + state.projectsEndpoint;
         this.getProjects(fullUrl);
     }
 }
@@ -136,7 +135,7 @@ export default {
   <div class="container py-5">
     <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4" v-if="!loading">
         <div class="col" v-for="project in projects">
-            <ProjectCard :project="project" :host="host" :imagesPath="imagesPath"/>
+            <ProjectCard :project="project" :host="state.host" :imagesPath="state.imagesPath"/>
         </div>
     </div>
     <PageLoader v-else>

@@ -37,3 +37,7 @@ export default {
     </nav>
   </header>
 </template>
+
+<style lang="scss" scoped>
+@use "../assets/scss/partials/_AppHeader.scss";
+</style>

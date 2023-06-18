@@ -1,0 +1,34 @@
+@use "./partials/_variables.scss" as *;
+
+// Import all of Bootstrap's CSS
+@import "/node_modules/bootstrap/scss/bootstrap.scss";
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: $dark;
+  color: $light;
+
+  .text_light_custom {
+    color: $light;
+  }
+
+  .text_dark_custom {
+    color: $dark;
+  }
+
+  .text_accent_custom {
+    color: $accent;
+  }
+
+  .bg_light_custom {
+    background-color: $light;
+  }
+
+  .bg_dark_custom {
+    background-color: $dark;
+  }
+
+  .bg_accent_custom {
+    background-color: $accent;
+  }
+}

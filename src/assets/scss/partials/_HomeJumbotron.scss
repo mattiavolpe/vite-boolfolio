@@ -1,0 +1,143 @@
+@use "./_variables.scss" as *;
+
+#homeJumbotron {
+  background: linear-gradient(180deg, $dark, $darker 25%, $darker 75%, $dark);
+
+  #jumboLeftSection {
+    text-align: center;
+
+    h1 {
+      font-size: 3rem;
+      margin: 0;
+
+      span {
+        font-size: 4rem;
+      }
+    }
+
+    h4 {
+      font-size: 22px;
+    }
+
+    a {
+      margin-inline: auto;
+      width: -moz-fit-content;
+      width: fit-content;
+      padding: 1rem;
+      border: 3px solid $accent;
+      transition: all 0.3s;
+
+      &:hover {
+        border: 3px solid $dark;
+        background-color: $accent;
+        color: $dark;
+      }
+    }
+  }
+
+  #avatarWrapper {
+    position: relative;
+    border-radius: 50%;
+    box-shadow: inset 0 0 50px 16px $darker;
+    background-color: $dark;
+    overflow: hidden;
+
+    img {
+      filter: drop-shadow(0 0 12px black);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background-color: $dark;
+      opacity: 0.25;
+    }
+  }
+
+  #logos {
+    .logoWrapper {
+    position: absolute;
+    width: 20%;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4%;
+    border-radius: 50%;
+    background-color: $dark;
+    box-shadow: inset 0 0 10px 5px $darker;
+
+      &:first-child {
+        top: 6%;
+        right: 3%;
+      }
+
+      &:nth-child(2) {
+        top: 57%;
+        left: 0;
+      }
+
+      &:last-child {
+        bottom: 5%;
+        right: 5%;
+      }
+
+      img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: contain;
+        filter: grayscale(0.25);
+      }
+    }
+  }
+
+  #scrollDownWrapper {
+    svg {
+      animation: bounce 2s infinite;
+    }
+  }
+}
+
+@media screen and (orientation: landscape) {
+  #homeJumbotron {
+    height: calc(100vh - 82px);
+    height: calc(100svh - 82px);
+
+    .container,
+    .row {
+      height: 100%;
+    }
+
+    #jumboLeftSection {
+      text-align: start;
+
+      h4 {
+        font-size: 1.875rem;
+      }
+
+      a {
+        margin-inline: 0;
+      }
+    }
+
+    #scrollDownWrapper {
+      transform: translate(0, -100%);
+    }
+  }  
+}
+
+@keyframes bounce {
+  from {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(0, -1.5rem);
+  }
+  to {
+    transform: translate(0, 0);
+  }
+}

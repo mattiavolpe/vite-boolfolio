@@ -1,11 +1,40 @@
 <script>
+import axios from 'axios';
 import { state } from '../state';
 export default {
   name: "AppJumbotron",
   data() {
     return {
-      state
+      state,
+      technologies: [],
+      technologiesToShow: [],
     }
+  },
+  methods: {
+    getTechnologies(url) {
+      axios
+      .get(url)
+      .then(response => {
+        if(response.data.success) {
+          this.technologies = response.data.technologies;
+          this.getRandomTechnologies();
+        }
+      })
+      .catch(error => {
+        console.error(error.message);
+      })
+    },
+    getRandomTechnologies() {
+      while(this.technologiesToShow.length < 3) {
+        const selectedTechnology = this.technologies[Math.floor(Math.random() * this.technologies.length)];
+        if(!this.technologiesToShow.includes(selectedTechnology)) {
+          this.technologiesToShow.push(selectedTechnology);
+        }
+      }
+    }
+  },
+  mounted() {
+    this.getTechnologies(state.host + state.technologiesEndpoint);
   }
 }
 </script>
@@ -20,8 +49,15 @@ export default {
           <router-link :to="{name: 'contacts'}" class="d-block text_accent_custom text-decoration-none rounded fw-medium">Contact me</router-link>
         </div>
         <div id="jumboRightSection" class="col d-flex justify-content-center align-items-center py-4">
-          <div id="avatarWrapper">
-            <img class="img-fluid" :src="state.getImageUrl('avatar_optimized.png')" alt="Mattia Volpe's Avatar">
+          <div id="logosRelativeReference" class="position-relative">
+            <div id="avatarWrapper">
+              <img class="img-fluid" :src="state.getImageUrl('avatar_optimized.png')" alt="Mattia Volpe's Avatar">
+            </div>
+            <div id="logos" v-if="technologies.length > 0">
+              <div class="logoWrapper" v-for="n in 3">
+                <img :src="state.host + state.imagesPath + technologiesToShow[n - 1].logo" :alt="technologiesToShow[n - 1].name + ' Logo'">
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -33,3 +69,7 @@ export default {
     </div>
   </section>
 </template>
+
+<style lang="scss" scoped>
+@use "../assets/scss/partials/_HomeJumbotron.scss";
+</style>

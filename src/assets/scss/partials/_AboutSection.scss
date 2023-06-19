@@ -1,0 +1,17 @@
+@use "./_variables.scss" as *;
+
+#aboutSection {
+  background: linear-gradient(180deg, $dark, $darkBlue 25px);
+  padding-top: 90px;
+
+  svg {
+    flex-shrink: 0;
+    width: 20%;
+    max-width: 110px;
+    fill: $accent;
+  }
+
+  p {
+    font-size: 1.25rem;
+  }
+}

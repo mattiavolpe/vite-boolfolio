@@ -5,8 +5,17 @@ export const state = new reactive({
   projectsEndpoint: "api/projects",
   technologiesEndpoint: "api/technologies",
   imagesPath: "storage/",
+
+  technologies: [],
+  technologiesToShow: [],
+  alphabeticalTechnologies: [],
+  
+  headerEl: null,
+  aboutSectionEl: null,
+  skillsSectionEl: null,
+  projectsSectionEl: null,
   
   getImageUrl(imgName) {
     return new URL(`./assets/img/${imgName}`, import.meta.url).href
-  }
+  },
 })

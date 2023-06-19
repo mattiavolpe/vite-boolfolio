@@ -6,6 +6,9 @@ export default {
     return {
       state,
     }
+  },
+  mounted() {
+    state.headerEl = document.querySelector("header");
   }
 }
 </script>

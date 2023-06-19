@@ -18,7 +18,6 @@ export default {
       axios
       .get(url)
       .then(response => {
-        console.log(response);
         if(response.data.success) {
           this.projects = response.data.projects;          
         }
@@ -30,7 +29,7 @@ export default {
   },
   mounted() {
     state.projectsSectionEl = document.getElementById("projectsSection");
-    this.getProjects(state.host + state.projectsEndpoint);
+    this.getProjects(state.host + state.latestProjectsEndpoint);
   }
 }
 </script>
@@ -39,48 +38,27 @@ export default {
   <div id="projectsSection" class="pb-5">
     <div class="container">
       <SectionTitle>PROJECTS OVERVIEW</sectionTitle>
+      <h6 class="text-center text-uppercase mb-5">These are my 3 newest projects. Click the button below to see all my projects</h6>
       <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
         <div class="col" v-for="project in projects">
           <router-link :to="{name: 'singleProject', params:{slug: project.slug}}">
-            <div class="projectWrapper rounded-3 p-2">
+            <div class="projectWrapper rounded-3 p-2 position-relative">
               <img :src="state.host + state.imagesPath + project.image" :alt="project.name + ' Image'">
-              <div class="infos">
-                
+              <div class="infos rounded-3">
+                <p class="text_dark_custom fw-bold text-uppercase">{{ project.name }}</p>
+                <router-link :to="{name: 'singleProject', params:{slug: project.slug}}" class="singleProjectLink text-decoration-none py-2 px-3 rounded bg_dark_custom text_accent_custom fw-bold">See details</router-link>
               </div>
             </div>
           </router-link>
         </div>
+      </div>
+      <div class="text-center mt-4">
+        <router-link id="allProjectsButton" :to="{name: 'projects'}" class="text-decoration-none py-2 px-3 rounded text_accent_custom fw-bold">See all projects</router-link>
       </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-@use "../assets/scss/partials/_variables.scss" as *;
-
-#projectsSection {
-  background: linear-gradient(180deg, $dark, $darkBlue 25px);
-  padding-top: 90px;
-
-  .projectWrapper {
-    background-color: $lightBlue;
-
-    .infos {
-      opacity: 0;
-      transition: 0.6s;
-    }
-
-    &:hover {
-      .infos {
-        opacity: 1;
-      }
-    }
-
-    img {
-      width: 100%;
-      object-fit: contain;
-      transition: 0.6s;
-    }
-  }
-}
+@use "../assets/scss/partials/_ProjectsSection.scss";
 </style>

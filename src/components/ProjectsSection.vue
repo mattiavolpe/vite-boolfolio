@@ -44,7 +44,7 @@ export default {
           <router-link :to="{name: 'singleProject', params:{slug: project.slug}}">
             <div class="projectWrapper rounded-3 p-2 position-relative">
               <img :src="state.host + state.imagesPath + project.image" :alt="project.name + ' Image'">
-              <div class="infos rounded-3">
+              <div class="infos">
                 <p class="text_dark_custom fw-bold text-uppercase">{{ project.name }}</p>
                 <router-link :to="{name: 'singleProject', params:{slug: project.slug}}" class="singleProjectLink text-decoration-none py-2 px-3 rounded bg_dark_custom text_accent_custom fw-bold">See details</router-link>
               </div>

@@ -33,7 +33,10 @@ const router = createRouter({
       name: "page404",
       component: PageNotFound,
     },
-  ]
+  ],
+  scrollBehavior() {
+    return { top: 0, left: 0 }
+  }
 });
 
 export { router };

@@ -15,7 +15,7 @@ header {
       box-shadow: none;
     }
 
-    .router-link-active {
+    .nav-link.router-link-active {
       color: $accent;
       box-shadow: inset 0 -3px 0 0 $accent;
 

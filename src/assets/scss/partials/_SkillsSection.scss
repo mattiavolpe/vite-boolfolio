@@ -1,0 +1,21 @@
+@use "./_variables.scss" as *;
+
+#skillsSection {
+  background: linear-gradient(180deg, $darkBlue, $dark 25px);
+  padding-top: 90px;
+
+  .technologyWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    aspect-ratio: 1 / 1;
+    background-color: $lightGray;
+
+    img {
+      height: calc(100% - 24px - 16px);
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+    }
+  }
+}

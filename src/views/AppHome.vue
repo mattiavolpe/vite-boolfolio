@@ -19,15 +19,20 @@ export default {
   },
   mounted() {
     window.addEventListener('scroll', () => {
-      if(state.projectsSectionEl.getClientRects()[0].y <= 65) {
-        state.headerEl.classList.remove("bg_dark_custom");
-        state.headerEl.classList.add("bg_dark_blue_custom");
-      } else if(state.skillsSectionEl.getClientRects()[0].y <= 65) {
-        state.headerEl.classList.remove("bg_dark_blue_custom");
-        state.headerEl.classList.add("bg_dark_custom");
-      } else if(state.aboutSectionEl.getClientRects()[0].y <= 65) {
-        state.headerEl.classList.remove("bg_dark_custom");
-        state.headerEl.classList.add("bg_dark_blue_custom");
+      if(this.$route.name === "home") {
+        if(state.projectsSectionEl.getClientRects()[0].y <= 65) {
+          state.headerEl.classList.remove("bg_dark_custom");
+          state.headerEl.classList.add("bg_dark_blue_custom");
+        } else if(state.skillsSectionEl.getClientRects()[0].y <= 65) {
+          state.headerEl.classList.remove("bg_dark_blue_custom");
+          state.headerEl.classList.add("bg_dark_custom");
+        } else if(state.aboutSectionEl.getClientRects()[0].y <= 65) {
+          state.headerEl.classList.remove("bg_dark_custom");
+          state.headerEl.classList.add("bg_dark_blue_custom");
+        } else {
+          state.headerEl.classList.remove("bg_dark_blue_custom");
+          state.headerEl.classList.add("bg_dark_custom");
+        }
       } else {
         state.headerEl.classList.remove("bg_dark_blue_custom");
         state.headerEl.classList.add("bg_dark_custom");

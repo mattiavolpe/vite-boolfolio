@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-  <h2 class="fw-bold text_accent_custom mb-3 text-uppercase">
+  <h2 class="fw-bold text_accent_custom mb-5 text-uppercase text-center">
     <slot></slot>
   </h2>
 </template>

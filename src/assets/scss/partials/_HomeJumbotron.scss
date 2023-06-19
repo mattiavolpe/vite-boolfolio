@@ -36,25 +36,12 @@
   }
 
   #avatarWrapper {
-    position: relative;
     border-radius: 50%;
     box-shadow: inset 0 0 50px 16px $darker;
     background-color: $dark;
-    overflow: hidden;
 
     img {
-      filter: drop-shadow(0 0 12px black);
-    }
-
-    &::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      background-color: $dark;
-      opacity: 0.25;
+      filter: drop-shadow(0 0 12px black) brightness(0.85) saturate(0.85);
     }
   }
 
@@ -90,7 +77,7 @@
         width: 100%;
         aspect-ratio: 1 / 1;
         object-fit: contain;
-        filter: grayscale(0.25);
+        filter: saturate(0.7);
       }
     }
   }
@@ -102,7 +89,7 @@
   }
 }
 
-@media screen and (orientation: landscape) {
+@media screen and (min-width: 768px) {
   #homeJumbotron {
     height: calc(100vh - 82px);
     height: calc(100svh - 82px);

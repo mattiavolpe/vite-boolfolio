@@ -17,7 +17,6 @@ export default {
           state.technologies = response.data.technologies;
 
           state.alphabeticalTechnologies = state.technologies.sort((a, b) => {
-            console.log(a.name, b.name);
             if(a.name < b.name) {
               return -1;
             }

@@ -15,6 +15,7 @@ export const state = new reactive({
   aboutSectionEl: null,
   skillsSectionEl: null,
   projectsSectionEl: null,
+  footerEl: null,
   
   getImageUrl(imgName) {
     return new URL(`./assets/img/${imgName}`, import.meta.url).href

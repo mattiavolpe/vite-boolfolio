@@ -20,7 +20,10 @@ export default {
   mounted() {
     window.addEventListener('scroll', () => {
       if(this.$route.name === "home") {
-        if(state.projectsSectionEl.getClientRects()[0].y <= 65) {
+        if(state.footerEl.getClientRects()[0].y <= 65) {
+          state.headerEl.classList.remove("bg_dark_blue_custom");
+          state.headerEl.classList.add("bg_dark_custom");
+        } else if(state.projectsSectionEl.getClientRects()[0].y <= 65) {
           state.headerEl.classList.remove("bg_dark_custom");
           state.headerEl.classList.add("bg_dark_blue_custom");
         } else if(state.skillsSectionEl.getClientRects()[0].y <= 65) {

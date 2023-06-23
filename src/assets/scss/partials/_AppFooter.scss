@@ -1,10 +1,14 @@
 @use "./_variables.scss" as *;
 #appFooter {
-  a {
-    transition: color 0.3s;
-
-    &:hover {
-      color: $accent;
+  .col {
+    width: fit-content;
+    
+    a {
+      transition: color 0.3s;
+  
+      &:hover {
+        color: $accent;
+      }
     }
   }
 

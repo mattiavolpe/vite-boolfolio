@@ -1,0 +1,14 @@
+@use "./_variables.scss" as *;
+#appFooter {
+  a {
+    transition: color 0.3s;
+
+    &:hover {
+      color: $accent;
+    }
+  }
+
+  .heart {
+    color: $accent;
+  }
+}

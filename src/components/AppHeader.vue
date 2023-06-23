@@ -8,13 +8,13 @@ export default {
     }
   },
   mounted() {
-    state.headerEl = document.querySelector("header");
+    state.headerEl = document.getElementById("appHeader");
   }
 }
 </script>
 
 <template>
-  <header class="position-sticky top-0 start-0 py-3 bg_dark_custom">
+  <header id="appHeader" class="position-sticky top-0 start-0 py-3 bg_dark_custom">
     <nav class="navbar navbar-expand-md p-0">
       <div class="container">
         <router-link :to="{name: 'home'}" class="navbar-brand p-0">

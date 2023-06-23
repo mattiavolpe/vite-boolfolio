@@ -39,7 +39,7 @@ export default {
     <div class="container">
       <SectionTitle>PROJECTS OVERVIEW</sectionTitle>
       <h6 class="text-center text-uppercase mb-5">These are my 3 newest projects. Click the button below to see all my projects</h6>
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-center g-3">
         <div class="col" v-for="project in projects">
           <router-link :to="{name: 'singleProject', params:{slug: project.slug}}">
             <div class="projectWrapper rounded-3 p-2 position-relative">

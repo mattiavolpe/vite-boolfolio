@@ -51,6 +51,8 @@
   }
 
   #allProjectsButton {
+    display: inline-block;
+    width: fit-content;
     border: 3px solid $accent;
     transition: 0.3s;
 

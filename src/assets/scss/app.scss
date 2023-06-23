@@ -44,9 +44,11 @@ body {
 }
 
 @media screen and (min-width: 768px) {
-  main {
-    // SUBTRACT HEADER AND FOOTER HEIGHTS
-    min-height: calc(100vh - 82px - 182px);
-    min-height: calc(100svh - 82px - 182px);
+  body {
+    main {
+      // SUBTRACT HEADER AND FOOTER HEIGHTS
+      min-height: calc(100vh - 82px - 182px);
+      min-height: calc(100svh - 82px - 182px);
+    }
   }
 }

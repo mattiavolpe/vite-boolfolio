@@ -10,7 +10,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import { faBars, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { faSquareGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
+import { faHourglass } from '@fortawesome/free-regular-svg-icons'
 
-library.add(faBars, faChevronDown, faSquareGithub, faLinkedin)
+library.add(faBars, faChevronDown, faSquareGithub, faLinkedin, faHourglass)
 
 createApp(App).component('font-awesome-icon', FontAwesomeIcon).use(router).mount('#app')

@@ -72,21 +72,21 @@ export default {
         getPaginationStyle(currentPage, paginationElement) {
             if(paginationElement === 0) {
                 if(currentPage === 1) {
-                    return "bg_custom_green text-black unclickable";
+                    return "bg_accent_custom text_dark_custom unclickable";
                 } else {
-                    return "bg-black text_custom_green";
+                    return "bg_dark_custom text_accent_custom";
                 }
             } else if(paginationElement === 1) {
                 if(currentPage === 1 || currentPage === this.pages) {
-                    return "bg-black text_custom_green";
+                    return "bg_dark_custom text_accent_custom";
                 } else {
-                    return "bg_custom_green text-black unclickable";
+                    return "bg_accent_custom text_dark_custom unclickable";
                 }
             } else {
                 if(currentPage === this.pages) {
-                    return "bg_custom_green text-black unclickable";
+                    return "bg_accent_custom text_dark_custom unclickable";
                 } else {
-                    return "bg-black text_custom_green";
+                    return "bg_dark_custom text_accent_custom";
                 }
             }
         },
@@ -133,30 +133,43 @@ export default {
 
 <template>
   <div class="container py-5">
-    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4" v-if="!loading">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-center g-3" v-if="!loading">
         <div class="col" v-for="project in projects">
-            <ProjectCard :project="project" :host="state.host" :imagesPath="state.imagesPath"/>
+            <ProjectCard :project="project" :host="state.host" :imagesPath="state.imagesPath" />
+            <h5 class="text_accent_custom text-center text-uppercase pt-1 mb-0 fw-bold">{{ project.name }}</h5>
         </div>
     </div>
     <PageLoader v-else>
-        LOADING PROJECTS...
+        <span class="loaderDot">.</span>
+        <span class="loaderDot">.</span>
+        <span class="loaderDot">.</span>
+        LOADING PROJECTS
+        <span class="loaderDot">.</span>
+        <span class="loaderDot">.</span>
+        <span class="loaderDot">.</span>
     </PageLoader>
-    <div class="text-end py-4 portfolio_pagination" v-if="pages >= 3">
-        <a @click="currentPage === 1 ? '' : getProjects(firstPageUrl)" :class="currentPage === 1 ? 'bg-black text-secondary unclickable' : 'bg-black text_custom_green'">First</a>
-        <a @click="currentPage === 1 ? '' : getProjects(prevPageUrl)" :class="currentPage === 1 ? 'bg-black text-secondary unclickable' : 'bg-black text_custom_green'">Prev</a>
-        <a @click="getPaginationLink(currentPage, 0)" :class="getPaginationStyle(currentPage, 0)">{{ getPaginationLabel(currentPage, 0) }}</a>
-        <a @click="getPaginationLink(currentPage, 1)" :class="getPaginationStyle(currentPage, 1)">{{ getPaginationLabel(currentPage, 1) }}</a>
-        <a @click="getPaginationLink(currentPage, 2)" :class="getPaginationStyle(currentPage, 2)">{{ getPaginationLabel(currentPage, 2) }}</a>
-        <a @click="currentPage === pages ? '' : getProjects(nextPageUrl)" :class="currentPage === pages ? 'bg-black text-secondary unclickable' : 'bg-black text_custom_green'">Next</a>
-        <a @click="currentPage === pages ? '' : getProjects(lastPageUrl)" :class="currentPage === pages ? 'bg-black text-secondary unclickable' : 'bg-black text_custom_green'">Latest</a>
-    </div>
-    <div class="text-end py-4 portfolio_pagination" v-else-if="pages === 2">
-        <a @click="currentPage === 1 ? '' : getProjects(firstPageUrl)" :class="currentPage === 1 ? 'bg-black text-secondary unclickable' : 'bg-black text_custom_green'">First</a>
-        <a @click="currentPage === 1 ? '' : getProjects(firstPageUrl)" :class="currentPage === 1 ? 'bg-black text-secondary unclickable' : 'bg-black text_custom_green'">Prev.</a>
-        <a @click="currentPage === 1 ? '' : getProjects(firstPageUrl)" :class="currentPage === 1 ? 'bg_custom_green text-black unclickable' : 'bg-black text_custom_green'">1</a>
-        <a @click="currentPage === 2 ? '' : getProjects(lastPageUrl)" :class="currentPage === 2 ? 'bg_custom_green text-black unclickable' : 'bg-black text_custom_green'">2</a>
-        <a @click="currentPage === 2 ? '' : getProjects(lastPageUrl)" :class="currentPage === 2 ? 'bg-black text-secondary unclickable' : 'bg-black text_custom_green'">Next</a>
-        <a @click="currentPage === 2 ? '' : getProjects(lastPageUrl)" :class="currentPage === 2 ? 'bg-black text-secondary unclickable' : 'bg-black text_custom_green'">Latest</a>
+    <div id="projectsPagination" class="mb-0">
+        <div class="text-end pt-5 portfolio_pagination" v-if="pages >= 3">
+            <a @click="currentPage === 1 ? '' : getProjects(firstPageUrl)" :class="currentPage === 1 ? 'bg_dark_custom text-secondary unclickable' : 'bg_dark_custom text_accent_custom'">First</a>
+            <a @click="currentPage === 1 ? '' : getProjects(prevPageUrl)" :class="currentPage === 1 ? 'bg_dark_custom text-secondary unclickable' : 'bg_dark_custom text_accent_custom'">Prev</a>
+            <a @click="getPaginationLink(currentPage, 0)" :class="getPaginationStyle(currentPage, 0)">{{ getPaginationLabel(currentPage, 0) }}</a>
+            <a @click="getPaginationLink(currentPage, 1)" :class="getPaginationStyle(currentPage, 1)">{{ getPaginationLabel(currentPage, 1) }}</a>
+            <a @click="getPaginationLink(currentPage, 2)" :class="getPaginationStyle(currentPage, 2)">{{ getPaginationLabel(currentPage, 2) }}</a>
+            <a @click="currentPage === pages ? '' : getProjects(nextPageUrl)" :class="currentPage === pages ? 'bg_dark_custom text-secondary unclickable' : 'bg_dark_custom text_accent_custom'">Next</a>
+            <a @click="currentPage === pages ? '' : getProjects(lastPageUrl)" :class="currentPage === pages ? 'bg_dark_custom text-secondary unclickable' : 'bg_dark_custom text_accent_custom'">Latest</a>
+        </div>
+        <div class="text-end pt-5 portfolio_pagination" v-else-if="pages === 2">
+            <a @click="currentPage === 1 ? '' : getProjects(firstPageUrl)" :class="currentPage === 1 ? 'bg_dark_custom text-secondary unclickable' : 'bg_dark_custom text_accent_custom'">First</a>
+            <a @click="currentPage === 1 ? '' : getProjects(firstPageUrl)" :class="currentPage === 1 ? 'bg_dark_custom text-secondary unclickable' : 'bg_dark_custom text_accent_custom'">Prev.</a>
+            <a @click="currentPage === 1 ? '' : getProjects(firstPageUrl)" :class="currentPage === 1 ? 'bg_accent_custom text_dark_custom unclickable' : 'bg_dark_custom text_accent_custom'">1</a>
+            <a @click="currentPage === 2 ? '' : getProjects(lastPageUrl)" :class="currentPage === 2 ? 'bg_accent_custom text_dark_custom unclickable' : 'bg_dark_custom text_accent_custom'">2</a>
+            <a @click="currentPage === 2 ? '' : getProjects(lastPageUrl)" :class="currentPage === 2 ? 'bg_dark_custom text-secondary unclickable' : 'bg_dark_custom text_accent_custom'">Next</a>
+            <a @click="currentPage === 2 ? '' : getProjects(lastPageUrl)" :class="currentPage === 2 ? 'bg_dark_custom text-secondary unclickable' : 'bg_dark_custom text_accent_custom'">Latest</a>
+        </div>
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+@use "../assets/scss/partials/_ProjectsView.scss";
+</style>

@@ -1,0 +1,46 @@
+@use "./_variables.scss" as *;
+.portfolio_pagination {
+    a {
+        text-decoration: none;
+        padding: 0.35rem 0.7rem;
+        border: 1px solid $accent;
+        cursor: pointer;
+
+        &.unclickable {
+            cursor: not-allowed;
+        }
+    }
+
+    a:first-child {
+        border-top-left-radius: 0.5rem;
+        border-bottom-left-radius: 0.5rem;
+    }
+
+    a:last-child {
+        border-top-right-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+    }
+}
+
+.loaderDot {
+    animation: fadeInAndOut 0.9s infinite;
+
+    &:nth-child(2),
+    &:nth-child(5) {
+        animation-delay: 0.3s;
+    }
+
+    &:nth-child(3),
+    &:last-child {
+        animation-delay: 0.6s;
+    }
+}
+
+@keyframes fadeInAndOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}

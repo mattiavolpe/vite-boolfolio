@@ -1,0 +1,46 @@
+@use "./_variables.scss" as *;
+.projectWrapper {
+  background-color: $lightGray;
+
+  .infos {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    width: calc(100% - 1rem);
+    height: calc(100% - 1rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: $accentSemiTransparent;
+    opacity: 0;
+    transition: 0.3s;
+
+    p {
+      font-size: 1.5rem;
+    }
+
+    .singleProjectLink {
+      border: 3px solid $dark;
+      transition: 0.3s;
+
+      &:hover {
+        border: 3px solid $dark;
+        background-color: $accent;
+        color: $dark;
+      }
+    }
+  }
+
+  &:hover {
+    .infos {
+      opacity: 1;
+    }
+  }
+
+  img {
+    width: 100%;
+    object-fit: contain;
+    transition: 0.6s;
+  }
+}

@@ -43,7 +43,7 @@ export default {
     </div>
     <template v-if="project.repositoryUrl">
         <h3 class="text_custom_green fw-bold mb-0">./Repository URL:</h3>
-        <a :href="project.repositoryUrl" target="_blank" class="text-white fw-normal mb-2 d-block fs-4">{{ project.repositoryUrl }}</a>
+        <a id="repositoryUrl" :href="project.repositoryUrl" target="_blank" class="text-white fw-normal mb-2 d-block fs-4">{{ project.repositoryUrl }}</a>
         <hr class="border_custom_green">
       </template>
       <h3 class="text_custom_green fw-bold" v-if="project.type">./Project type:
@@ -61,3 +61,9 @@ export default {
     LOADING PROJECT DETAILS...
   </PageLoader>
 </template>
+
+<style lang="scss" scoped>
+#repositoryUrl {
+  word-break: break-all;
+}
+</style>

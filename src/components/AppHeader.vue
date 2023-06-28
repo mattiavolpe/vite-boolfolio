@@ -32,7 +32,7 @@ export default {
               <router-link :to="{name: 'projects'}" class="nav-link text_light_custom fw-medium" aria-current="page">Projects</router-link>
             </li>
             <li class="nav-item">
-              <router-link :to="{name: 'contacts'}" class="nav-link text_light_custom fw-medium" aria-current="page">Contact me</router-link>
+              <router-link :to="{name: 'contact'}" class="nav-link text_light_custom fw-medium" aria-current="page">Contact me</router-link>
             </li>
           </ul>
         </div>

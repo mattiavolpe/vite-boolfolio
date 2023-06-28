@@ -52,7 +52,7 @@ export default {
         <div id="jumboLeftSection" class="col">
           <h1>Hey, I'm <span class="text_accent_custom fw-bold">Mattia Volpe</span></h1>
           <h4 class="my-3">Junior (for now <span class="text_accent_custom">&smile;</span>) <br>Full-Stack Web Developer</h4>
-          <router-link :to="{name: 'contacts'}" class="d-block text_accent_custom text-decoration-none rounded fw-bold">Contact me</router-link>
+          <router-link :to="{name: 'contact'}" class="d-block text_accent_custom text-decoration-none rounded fw-bold">Contact me</router-link>
         </div>
         <div id="jumboRightSection" class="col d-flex justify-content-center align-items-center py-4">
           <div id="logosRelativeReference" class="position-relative">

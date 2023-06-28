@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import AppHome from "./views/AppHome.vue";
 import ProjectsView from "./views/ProjectsView.vue"
 import SingleProject from "./views/SingleProject.vue";
-import ContactsView from "./views/ContactsView.vue";
+import ContactView from "./views/ContactView.vue";
 import PageNotFound from "./views/PageNotFound.vue";
 
 const router = createRouter({
@@ -24,9 +24,9 @@ const router = createRouter({
       component: SingleProject,
     },
     {
-      path: "/contacts",
-      name: "contacts",
-      component: ContactsView,
+      path: "/contact",
+      name: "contact",
+      component: ContactView,
     },
     {
       path: "/:pathMatch(.*)*",

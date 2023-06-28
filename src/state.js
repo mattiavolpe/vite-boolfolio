@@ -5,6 +5,7 @@ export const state = new reactive({
   projectsEndpoint: "api/projects/",
   latestProjectsEndpoint: "api/latestProjects/",
   technologiesEndpoint: "api/technologies/",
+  contactEndpoint: "api/contact/",
   imagesPath: "storage/",
 
   technologies: [],

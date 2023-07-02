@@ -91,6 +91,8 @@
   }
 
   #scrollDownWrapper {
+    display: none;
+
     svg {
       animation: bounce 2s infinite;
     }
@@ -129,6 +131,7 @@
     }
 
     #scrollDownWrapper {
+      display: block;
       transform: translate(0, -100%);
     }
   }  

@@ -16,7 +16,7 @@ export default {
     },
     mounted() {
         axios
-            .get(state.host + state.projectsEndpoint + "/" + this.$route.params.slug)
+            .get(state.host + state.projectsEndpoint + this.$route.params.slug)
             .then(response => {
             if (response.data.success) {
                 this.project = response.data.project;

@@ -1,7 +1,8 @@
 import { reactive } from "vue";
+import { env } from "node:process"
 
 export const state = new reactive({
-  host: process.env.DB_BASE_SITE,
+  host: env.DB_BASE_SITE,
   projectsEndpoint: "api/projects/",
   latestProjectsEndpoint: "api/latestProjects/",
   technologiesEndpoint: "api/technologies/",

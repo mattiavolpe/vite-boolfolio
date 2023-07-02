@@ -1,7 +1,7 @@
 import { reactive } from "vue";
 
 export const state = new reactive({
-  host: "https://admin.mattiavolpe.dev/",
+  host: import.meta.env.VITE_DB_BASE_SITE,
   projectsEndpoint: "api/projects/",
   latestProjectsEndpoint: "api/latestProjects/",
   technologiesEndpoint: "api/technologies/",

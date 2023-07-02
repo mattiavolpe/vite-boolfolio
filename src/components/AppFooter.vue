@@ -15,7 +15,7 @@ export default {
 <template>
   <div id="appFooter" class="py-5">
     <div class="container text-center">
-      <div class="row row-cols-1 row-cols-md-2 justify-content-center align-items-center gx-5 gy-3">
+      <div class="row row-cols-1 row-cols-md-2 justify-content-center align-items-center gx-5 gy-3 w-100 mx-auto">
         <div class="col">
           <a href="https://github.com/mattiavolpe" target="_blank" id="github" class="d-flex justify-content-center justify-content-md-end align-items-center gap-3 text_light_custom">
             <font-awesome-icon icon="fa-brands fa-square-github" class="fa-2x" />

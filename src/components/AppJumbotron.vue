@@ -68,7 +68,7 @@ export default {
       </div>
     </div>
     <div id="scrollDownWrapper" class="text-center py-2">
-      <a href="#aboutSection">
+      <a href="#aboutSection" @click.prevent="">
         <font-awesome-icon icon="fa-solid fa-chevron-down" class="fa-4x text_accent_custom"/>
       </a>
     </div>

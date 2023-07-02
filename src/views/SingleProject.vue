@@ -1,4 +1,5 @@
 <script>
+import { state } from "../state";
 import axios from 'axios';
 import PageLoader from '../components/PageLoader.vue';
 
@@ -9,15 +10,13 @@ export default {
     },
     data() {
         return {
-            host: "http://127.0.0.1:8000/",
-            projectsEndpoint: "api/projects",
-            imagesPath: "storage/",
+            state,
             project: null,
         };
     },
     mounted() {
         axios
-            .get(this.host + this.projectsEndpoint + "/" + this.$route.params.slug)
+            .get(state.host + state.projectsEndpoint + "/" + this.$route.params.slug)
             .then(response => {
             if (response.data.success) {
                 this.project = response.data.project;
@@ -39,7 +38,7 @@ export default {
   <div class="container py-5" v-if="project && !loading">
     <h1 class="text-center text_custom_green mb-0 fw-bold">{{ project.name }}</h1>
     <div class="text-center py-4">
-      <img class="img-fluid" :src="host + imagesPath + project.image" :alt="`${project.name} image`">
+      <img class="img-fluid" :src="state.host + state.imagesPath + project.image" :alt="`${project.name} image`">
     </div>
     <template v-if="project.repositoryUrl">
         <h3 class="text_custom_green fw-bold mb-0">./Repository URL:</h3>

@@ -15,7 +15,6 @@ export default {
       .then(response => {
         if(response.data.success) {
           state.technologies = response.data.technologies;
-
           state.alphabeticalTechnologies = state.technologies.sort((a, b) => {
             if(a.name < b.name) {
               return -1;

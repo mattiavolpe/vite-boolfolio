@@ -6,7 +6,7 @@ export const state = new reactive({
   latestProjectsEndpoint: "api/latestProjects/",
   technologiesEndpoint: "api/technologies/",
   contactEndpoint: "api/contact/",
-  imagesPath: "storage/",
+  imagesPath: import.meta.env.VITE_IMAGES_PATH,
 
   technologies: [],
   technologiesToShow: [],

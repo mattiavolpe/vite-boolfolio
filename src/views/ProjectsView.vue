@@ -148,7 +148,16 @@ export default {
         <span class="loaderDot">.</span>
         <span class="loaderDot">.</span>
     </PageLoader>
-    <div id="projectsPagination" class="mb-0">
+    <div id="projectsPagination" class="mb-0 d-sm-none" v-if="pages > 1">
+        <div class="text-end pt-5 portfolio_pagination">
+            <a @click="currentPage === 1 ? '' : getProjects(firstPageUrl)" :class="currentPage === 1 ? 'bg_dark_custom text-secondary unclickable' : 'bg_dark_custom text_accent_custom'">First</a>
+            <a @click="currentPage === 1 ? '' : getProjects(prevPageUrl)" :class="currentPage === 1 ? 'bg_dark_custom text-secondary unclickable' : 'bg_dark_custom text_accent_custom'">Prev</a>
+            <a @click="" class="bg_accent_custom text_dark_custom unclickable">{{ currentPage }}</a>
+            <a @click="currentPage === pages ? '' : getProjects(nextPageUrl)" :class="currentPage === pages ? 'bg_dark_custom text-secondary unclickable' : 'bg_dark_custom text_accent_custom'">Next</a>
+            <a @click="currentPage === pages ? '' : getProjects(lastPageUrl)" :class="currentPage === pages ? 'bg_dark_custom text-secondary unclickable' : 'bg_dark_custom text_accent_custom'">Latest</a>
+        </div>
+    </div>
+    <div id="projectsPagination" class="mb-0 d-none d-sm-block" v-if="pages > 1">
         <div class="text-end pt-5 portfolio_pagination" v-if="pages >= 3">
             <a @click="currentPage === 1 ? '' : getProjects(firstPageUrl)" :class="currentPage === 1 ? 'bg_dark_custom text-secondary unclickable' : 'bg_dark_custom text_accent_custom'">First</a>
             <a @click="currentPage === 1 ? '' : getProjects(prevPageUrl)" :class="currentPage === 1 ? 'bg_dark_custom text-secondary unclickable' : 'bg_dark_custom text_accent_custom'">Prev</a>

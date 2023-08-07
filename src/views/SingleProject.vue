@@ -50,7 +50,7 @@ export default {
         <hr>
       </template>
       <h3 class="text_accent_custom fw-bold" v-if="project.type">Project type:
-        <span class="text_light_custom fw-normal fs-4">{{ project.type.name }}</span>
+        <span class="text_light_custom fw-normal d-block fs-4">{{ project.type.name }}</span>
         <hr>
       </h3>
       <template v-if="project.technologies">

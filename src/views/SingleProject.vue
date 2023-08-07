@@ -45,19 +45,22 @@ export default {
       <img class="img-fluid" :src="state.host + state.imagesPath + project.image" :alt="`${project.name} image`">
     </div>
     <template v-if="project.repositoryUrl">
-        <h3 class="text_accent_custom fw-bold mb-0">Repository URL:</h3>
+        <h3 class="text_accent_custom fw-bold">Repository URL:</h3>
         <a id="repositoryUrl" :href="project.repositoryUrl" target="_blank" class="text_light_custom fw-normal mb-2 d-block fs-4">{{ project.repositoryUrl }}</a>
-        <hr class="border_custom_green">
+        <hr>
       </template>
       <h3 class="text_accent_custom fw-bold" v-if="project.type">Project type:
         <span class="text_light_custom fw-normal fs-4">{{ project.type.name }}</span>
-        <hr class="border_custom_green">
+        <hr>
       </h3>
       <template v-if="project.technologies">
-        <h3 class="text_accent_custom fw-bold mb-0">Used technologies:</h3>
-        <ul class="fw-bold list-unstyled"> 
-          <li class="text_light_custom fw-normal fs-4" v-for="technology in project.technologies">
-            <img :src="state.host + state.imagesPath + technology.logo" :alt="technology.name + ' Logo'">
+        <h3 class="text_accent_custom fw-bold">Used technologies:</h3>
+        <ul class="fw-bold list-unstyled row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 g-3 justify-content-center"> 
+          <li class="col" v-for="technology in project.technologies">
+            <div class="technologyWrapper rounded-3 p-2">
+              <img :src="state.host + state.imagesPath + technology.logo" :alt="technology.name + ' Logo'">
+              <p class="mb-0 mt-2 fw-normal">{{ technology.name }}</p>
+            </div>
           </li>
         </ul>
       </template>
@@ -68,7 +71,5 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-#repositoryUrl {
-  word-break: break-all;
-}
+@use "../assets/scss/partials/_SingleProject.scss";
 </style>

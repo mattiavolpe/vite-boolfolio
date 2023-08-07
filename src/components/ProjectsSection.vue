@@ -39,7 +39,7 @@ export default {
 <template>
   <div id="projectsSection" class="pb-5">
     <div class="container">
-      <SectionTitle>PROJECTS OVERVIEW</sectionTitle>
+      <SectionTitle>PROJECTS OVERVIEW</SectionTitle>
       <h6 v-if="projects" class="text-center text-uppercase mb-5">These are my 3 newest projects. Click the button below to see all my projects</h6>
       <div v-if="projects" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-center g-3">
         <div class="col" v-for="project in projects">

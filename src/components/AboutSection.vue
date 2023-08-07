@@ -21,7 +21,7 @@ export default {
 <template>
   <section id="aboutSection" class="pb-5">
     <div class="container">
-      <SectionTitle>About me</sectionTitle>
+      <SectionTitle>About me</SectionTitle>
       <div class="d-flex align-items-start gap-3">
         <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13 7">
           <path id="Layer1" class="s0" d="m2 1.5c0 0.3-0.2 0.5-0.5 0.5-0.3 0-0.5-0.2-0.5-0.5 0-0.3 0.2-0.5 0.5-0.5 0.3 0 0.5 0.2 0.5 0.5z"/>

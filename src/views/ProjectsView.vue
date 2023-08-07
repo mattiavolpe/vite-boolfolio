@@ -3,6 +3,7 @@ import { state } from "../state";
 import axios from "axios";
 import ProjectCard from "../components/ProjectCard.vue";
 import PageLoader from "../components/PageLoader.vue";
+import SectionTitle from "../components/SectionTitle.vue";
 import { nextTick } from "vue";
 
 export default {
@@ -10,6 +11,7 @@ export default {
     components: {
     ProjectCard,
     PageLoader,
+    SectionTitle,
 },
     data() {
         return {
@@ -133,6 +135,9 @@ export default {
 
 <template>
   <div class="container py-5">
+    <SectionTitle>
+        PROJECTS
+    </SectionTitle>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-center g-3" v-if="!loading">
         <div class="col" v-for="project in projects">
             <ProjectCard :project="project" :host="state.host" :imagesPath="state.imagesPath" />

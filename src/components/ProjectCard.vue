@@ -14,7 +14,7 @@ export default {
     <div class="projectWrapper rounded-3 p-2 position-relative">
       <img :src="host + imagesPath + project.image" :alt="project.name + ' Image'">
       <div class="infos">
-        <p class="text_dark_custom text-uppercase" v-if="project.type">{{ project.type.name }}</p>
+        <p class="text_dark_custom text-uppercase text-center" v-if="project.type">{{ project.type.name }}</p>
         <button class="singleProjectLink text-decoration-none py-2 px-3 rounded bg_dark_custom text_accent_custom fw-bold">See details</button>
       </div>
     </div>

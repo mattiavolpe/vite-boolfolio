@@ -1,0 +1,3 @@
+## 2024-05-18 - Scroll Event Listeners Without requestAnimationFrame
+**Learning:** Found a critical performance bottleneck in how scroll events were handled in `src/views/AppHome.vue`. Attaching an anonymous function to `window.addEventListener('scroll')` in Vue's `mounted` hook without `unmounted` cleanup caused memory leaks. More significantly, calling `getClientRects()[0].y` synchronously on every scroll event caused layout thrashing and severe performance degradation.
+**Action:** Always extract scroll logic into a named component method. Use `requestAnimationFrame` to throttle layout calculations and prevent layout thrashing. Pass `{ passive: true }` to unblock scroll repainting. Lastly, always remove event listeners in `unmounted()` hook.

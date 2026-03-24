@@ -1,0 +1,3 @@
+## 2024-05-24 - Form Input Validation and Loading State
+**Learning:** Legacy forms often miss native HTML validation (`type="email"`, `required` attributes) and disabled loading states, allowing duplicate submissions and providing poor screen reader context. Using `aria-hidden="true"` on required field indicator asterisks correctly hides redundant readouts for screen readers.
+**Action:** Always verify basic native validation attributes are set appropriately on form inputs, and include an explicit reactive state (`isSubmitting`) to disable inputs/buttons during async operations.

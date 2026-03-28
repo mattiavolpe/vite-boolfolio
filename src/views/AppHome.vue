@@ -17,8 +17,17 @@ export default {
       state,
     }
   },
-  mounted() {
-    window.addEventListener('scroll', () => {
+  created() {
+    // ⚡ Bolt Optimization: Use a non-reactive instance variable for the scroll flag
+    // Why: Adding it to data() creates unnecessary reactivity tracking for a purely internal state
+    // Impact: Minor memory/initialization savings, cleaner separation of concerns
+    this.scrollTicking = false;
+  },
+  methods: {
+    updateHeaderBackground() {
+      // Check if elements exist to prevent errors when navigating away
+      if (!state.headerEl || !state.footerEl || !state.projectsSectionEl || !state.skillsSectionEl || !state.aboutSectionEl) return;
+
       if(this.$route.name === "home") {
         if(state.footerEl.getClientRects()[0].y <= 90) {
           state.headerEl.classList.remove("bg_dark_blue_custom");
@@ -40,7 +49,28 @@ export default {
         state.headerEl.classList.remove("bg_dark_blue_custom");
         state.headerEl.classList.add("bg_dark_custom");
       }
-    })
+    },
+    handleScroll() {
+      // ⚡ Bolt Optimization: Throttle heavy DOM reads (getClientRects) during scroll
+      // Why: Scroll events fire rapidly. Synchronous layout reads cause layout thrashing and frame drops.
+      // Impact: Synchronizes DOM updates with the browser's paint cycle, ensuring a smooth 60fps scroll.
+      if (!this.scrollTicking) {
+        window.requestAnimationFrame(() => {
+          this.updateHeaderBackground();
+          this.scrollTicking = false;
+        });
+        this.scrollTicking = true;
+      }
+    }
+  },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  unmounted() {
+    // ⚡ Bolt Optimization: Remove global event listener on component unmount
+    // Why: The scroll listener previously persisted after navigating away from AppHome.
+    // Impact: Prevents memory leaks and unnecessary processing (CPU cycles) on other routes.
+    window.removeEventListener('scroll', this.handleScroll);
   }
 }
 </script>

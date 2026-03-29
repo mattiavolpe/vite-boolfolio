@@ -17,19 +17,41 @@ export default {
       state,
     }
   },
+  created() {
+    // Non-reactive variables for scroll performance optimization
+    this.ticking = false;
+    this.boundScrollHandler = this.onScroll.bind(this);
+  },
   mounted() {
-    window.addEventListener('scroll', () => {
+    window.addEventListener('scroll', this.boundScrollHandler, { passive: true });
+  },
+  unmounted() {
+    window.removeEventListener('scroll', this.boundScrollHandler);
+  },
+  methods: {
+    onScroll() {
+      if (!this.ticking) {
+        window.requestAnimationFrame(() => {
+          this.handleScroll();
+          this.ticking = false;
+        });
+        this.ticking = true;
+      }
+    },
+    handleScroll() {
+      if (!state.headerEl) return;
+
       if(this.$route.name === "home") {
-        if(state.footerEl.getClientRects()[0].y <= 90) {
+        if(state.footerEl && state.footerEl.getClientRects()[0].y <= 90) {
           state.headerEl.classList.remove("bg_dark_blue_custom");
           state.headerEl.classList.add("bg_dark_custom");
-        } else if(state.projectsSectionEl.getClientRects()[0].y <= 65) {
+        } else if(state.projectsSectionEl && state.projectsSectionEl.getClientRects()[0].y <= 65) {
           state.headerEl.classList.remove("bg_dark_custom");
           state.headerEl.classList.add("bg_dark_blue_custom");
-        } else if(state.skillsSectionEl.getClientRects()[0].y <= 65) {
+        } else if(state.skillsSectionEl && state.skillsSectionEl.getClientRects()[0].y <= 65) {
           state.headerEl.classList.remove("bg_dark_blue_custom");
           state.headerEl.classList.add("bg_dark_custom");
-        } else if(state.aboutSectionEl.getClientRects()[0].y <= 65) {
+        } else if(state.aboutSectionEl && state.aboutSectionEl.getClientRects()[0].y <= 65) {
           state.headerEl.classList.remove("bg_dark_custom");
           state.headerEl.classList.add("bg_dark_blue_custom");
         } else {
@@ -40,7 +62,7 @@ export default {
         state.headerEl.classList.remove("bg_dark_blue_custom");
         state.headerEl.classList.add("bg_dark_custom");
       }
-    })
+    }
   }
 }
 </script>

@@ -17,19 +17,38 @@ export default {
       state,
     }
   },
-  mounted() {
-    window.addEventListener('scroll', () => {
-      if(this.$route.name === "home") {
-        if(state.footerEl.getClientRects()[0].y <= 90) {
+  created() {
+    this.ticking = false;
+    this.handleScroll = () => {
+      if (!this.ticking) {
+        window.requestAnimationFrame(() => {
+          this.updateHeaderColor();
+          this.ticking = false;
+        });
+        this.ticking = true;
+      }
+    };
+  },
+  methods: {
+    updateHeaderColor() {
+      if (!state.headerEl) return;
+
+      if(this.$route && this.$route.name === "home") {
+        const footerY = state.footerEl?.getBoundingClientRect().y ?? Infinity;
+        const projectsY = state.projectsSectionEl?.getBoundingClientRect().y ?? Infinity;
+        const skillsY = state.skillsSectionEl?.getBoundingClientRect().y ?? Infinity;
+        const aboutY = state.aboutSectionEl?.getBoundingClientRect().y ?? Infinity;
+
+        if(footerY <= 90) {
           state.headerEl.classList.remove("bg_dark_blue_custom");
           state.headerEl.classList.add("bg_dark_custom");
-        } else if(state.projectsSectionEl.getClientRects()[0].y <= 65) {
+        } else if(projectsY <= 65) {
           state.headerEl.classList.remove("bg_dark_custom");
           state.headerEl.classList.add("bg_dark_blue_custom");
-        } else if(state.skillsSectionEl.getClientRects()[0].y <= 65) {
+        } else if(skillsY <= 65) {
           state.headerEl.classList.remove("bg_dark_blue_custom");
           state.headerEl.classList.add("bg_dark_custom");
-        } else if(state.aboutSectionEl.getClientRects()[0].y <= 65) {
+        } else if(aboutY <= 65) {
           state.headerEl.classList.remove("bg_dark_custom");
           state.headerEl.classList.add("bg_dark_blue_custom");
         } else {
@@ -40,7 +59,13 @@ export default {
         state.headerEl.classList.remove("bg_dark_blue_custom");
         state.headerEl.classList.add("bg_dark_custom");
       }
-    })
+    }
+  },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll, { passive: true });
+  },
+  unmounted() {
+    window.removeEventListener('scroll', this.handleScroll);
   }
 }
 </script>

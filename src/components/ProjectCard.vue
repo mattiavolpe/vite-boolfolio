@@ -16,7 +16,7 @@ export default {
       <img v-else :src="host + imagesPath + 'uploads/image_not_available.png'" alt="Image not found placeholder" style="aspect-ratio: 405 / 205;">
       <div class="infos">
         <p class="text_dark_custom text-uppercase text-center" v-if="project.type">{{ project.type.name }}</p>
-        <button class="singleProjectLink text-decoration-none py-2 px-3 rounded bg_dark_custom text_accent_custom fw-bold">See details</button>
+        <span class="singleProjectLink d-inline-block text-decoration-none py-2 px-3 rounded bg_dark_custom text_accent_custom fw-bold">See details</span>
       </div>
     </div>
   </router-link>

@@ -1,0 +1,3 @@
+## 2024-04-03 - Unthrottled Global Scroll Listeners
+**Learning:** Attaching unthrottled global scroll listeners that perform synchronous layout measurements (`getClientRects()` or `getBoundingClientRect()`) in Vue SPAs causes severe layout thrashing and main-thread blocking. Furthermore, if these listeners are not explicitly removed during the component's teardown lifecycle (`unmounted`), they persist across route changes, leading to memory leaks and unnecessary processing on non-related pages.
+**Action:** Always throttle scroll event listeners using `requestAnimationFrame`, bind them with `{ passive: true }`, initialize non-reactive state in `created()`, and explicitly remove global event listeners in the `unmounted()` lifecycle hook.

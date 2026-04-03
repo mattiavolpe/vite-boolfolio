@@ -13,24 +13,36 @@ export default {
       name: "",
       emailAddress: "",
       emailContent: "",
+      isSending: false,
+      successMessage: "",
+      errorMessage: "",
     }
   },
   methods: {
-    sendMail() {
+    async sendMail() {
+      this.isSending = true;
+      this.successMessage = "";
+      this.errorMessage = "";
+
       const data = {
         name: this.name,
         emailAddress: this.emailAddress,
         emailContent: this.emailContent,
       }
 
-      axios
-      .post(state.host + state.contactEndpoint, data)
-      .then(response => {
-        console.log(response)
-      })
-      .catch(error => {
+      try {
+        const response = await axios.post(state.host + state.contactEndpoint, data);
+        console.log(response);
+        this.successMessage = "Message sent successfully! I will get back to you soon.";
+        this.name = "";
+        this.emailAddress = "";
+        this.emailContent = "";
+      } catch (error) {
         console.error(error);
-      })
+        this.errorMessage = "There was an error sending your message. Please try again later.";
+      } finally {
+        this.isSending = false;
+      }
     },
   }
 }
@@ -43,18 +55,26 @@ export default {
     </SectionTitle>
     <form @submit.prevent="sendMail()">
       <div class="mb-3">
-        <label for="name" class="d-block text_accent_custom fw-bold">Full name</label>
-        <input type="mail" id="name" name="name" class="w-100 rounded-3 p-2" placeholder="Type your full name" v-model="name">
+        <label for="name" class="d-block text_accent_custom fw-bold">Full name <span class="text-danger" aria-hidden="true">*</span></label>
+        <input type="text" id="name" name="name" class="w-100 rounded-3 p-2" placeholder="Type your full name" v-model="name" required>
       </div>
       <div class="mb-3">
-        <label for="emailAddress" class="d-block text_accent_custom fw-bold">E-mail address</label>
-        <input type="mail" id="emailAddress" name="emailAddress" class="w-100 rounded-3 p-2" placeholder="Type your e-mail address" v-model="emailAddress">
+        <label for="emailAddress" class="d-block text_accent_custom fw-bold">E-mail address <span class="text-danger" aria-hidden="true">*</span></label>
+        <input type="email" id="emailAddress" name="emailAddress" class="w-100 rounded-3 p-2" placeholder="Type your e-mail address" v-model="emailAddress" required>
       </div>
       <div class="mb-3">
-        <label for="emailContent" class="d-block text_accent_custom fw-bold">Your message</label>
-        <textarea name="emailContent" id="emailContent" rows="10" class="w-100 rounded-3 p-2" placeholder="Type your message" v-model="emailContent"></textarea>
+        <label for="emailContent" class="d-block text_accent_custom fw-bold">Your message <span class="text-danger" aria-hidden="true">*</span></label>
+        <textarea name="emailContent" id="emailContent" rows="10" class="w-100 rounded-3 p-2" placeholder="Type your message" v-model="emailContent" required></textarea>
       </div>
-      <button class="bg_accent_custom border-0 text_dark_custom rounded fw-bold px-2 py-1" type="submit">Send e-mail</button>
+      <button class="bg_accent_custom border-0 text_dark_custom rounded fw-bold px-2 py-1" type="submit" :disabled="isSending">
+        {{ isSending ? 'Sending...' : 'Send e-mail' }}
+      </button>
+      <div v-if="successMessage" class="mt-3 text-success fw-bold" role="status" aria-live="polite">
+        {{ successMessage }}
+      </div>
+      <div v-if="errorMessage" class="mt-3 text-danger fw-bold" role="alert" aria-live="assertive">
+        {{ errorMessage }}
+      </div>
     </form>
   </div>
 </template>

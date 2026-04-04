@@ -1,0 +1,3 @@
+## 2024-04-04 - Unmanaged Global Scroll Listeners
+**Learning:** Found a performance anti-pattern in Vue components where a global `window.scroll` listener was attached in `mounted` without being throttled, used `{ passive: true }`, or being cleaned up in `unmounted`. It also performed synchronous layout measurements using `getClientRects()[0]` causing layout thrashing.
+**Action:** Throttled scroll listeners with `requestAnimationFrame`, used `{ passive: true }` to unblock scroll performance, used `getBoundingClientRect()` for safer layout calculation, and implemented strict cleanup routines in the `unmounted` lifecycle hook for animation frames and event listeners.

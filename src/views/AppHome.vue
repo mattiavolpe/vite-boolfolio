@@ -17,19 +17,33 @@ export default {
       state,
     }
   },
-  mounted() {
-    window.addEventListener('scroll', () => {
+  created() {
+    this.scrollTicking = false;
+    this.scrollAnimationFrame = null;
+  },
+  methods: {
+    handleScroll() {
+      if (!this.scrollTicking) {
+        this.scrollAnimationFrame = window.requestAnimationFrame(() => {
+          this.updateHeaderState();
+          this.scrollTicking = false;
+        });
+        this.scrollTicking = true;
+      }
+    },
+    updateHeaderState() {
       if(this.$route.name === "home") {
-        if(state.footerEl.getClientRects()[0].y <= 90) {
+        // ⚡ Bolt: Optimized layout thrashing by using getBoundingClientRect() and throttling with requestAnimationFrame
+        if(state.footerEl?.getBoundingClientRect().y <= 90) {
           state.headerEl.classList.remove("bg_dark_blue_custom");
           state.headerEl.classList.add("bg_dark_custom");
-        } else if(state.projectsSectionEl.getClientRects()[0].y <= 65) {
+        } else if(state.projectsSectionEl?.getBoundingClientRect().y <= 65) {
           state.headerEl.classList.remove("bg_dark_custom");
           state.headerEl.classList.add("bg_dark_blue_custom");
-        } else if(state.skillsSectionEl.getClientRects()[0].y <= 65) {
+        } else if(state.skillsSectionEl?.getBoundingClientRect().y <= 65) {
           state.headerEl.classList.remove("bg_dark_blue_custom");
           state.headerEl.classList.add("bg_dark_custom");
-        } else if(state.aboutSectionEl.getClientRects()[0].y <= 65) {
+        } else if(state.aboutSectionEl?.getBoundingClientRect().y <= 65) {
           state.headerEl.classList.remove("bg_dark_custom");
           state.headerEl.classList.add("bg_dark_blue_custom");
         } else {
@@ -37,10 +51,21 @@ export default {
           state.headerEl.classList.add("bg_dark_custom");
         }
       } else {
-        state.headerEl.classList.remove("bg_dark_blue_custom");
-        state.headerEl.classList.add("bg_dark_custom");
+        state.headerEl?.classList.remove("bg_dark_blue_custom");
+        state.headerEl?.classList.add("bg_dark_custom");
       }
-    })
+    }
+  },
+  mounted() {
+    // ⚡ Bolt: Added { passive: true } to prevent scroll blocking
+    window.addEventListener('scroll', this.handleScroll, { passive: true });
+  },
+  unmounted() {
+    // ⚡ Bolt: Clean up event listeners and animation frames to prevent memory leaks
+    window.removeEventListener('scroll', this.handleScroll);
+    if (this.scrollAnimationFrame) {
+      window.cancelAnimationFrame(this.scrollAnimationFrame);
+    }
   }
 }
 </script>

@@ -1,0 +1,3 @@
+## 2026-04-05 - Accessible Post-Submission Feedback
+**Learning:** Asynchronous form submissions (where the page doesn't reload) need a way to announce the result (success or error) to screen reader users without requiring them to shift focus manually.
+**Action:** Always implement a dedicated feedback container with `role="status"` and `aria-live="polite"` that renders the result message dynamically when the async operation completes. Ensure the submit button is properly disabled (`isSending` state) during the operation to prevent duplicate submissions and convey the loading state.

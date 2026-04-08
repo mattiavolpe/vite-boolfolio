@@ -1,0 +1,3 @@
+## 2024-04-08 - Accessible Post-Submission Feedback for Async Forms
+**Learning:** Asynchronous form submissions often lack feedback that is perceptible to screen reader users, since the page does not reload. In this Vue app, standard `alert` dialogs or visually updated text fail to notify users of a success or error cleanly.
+**Action:** Always implement an `isSending` state to disable the submit button (providing visual and semantic feedback during processing) and use a dedicated element with `role="status"` and `aria-live="polite"` to render the post-submission success or error feedback messages.

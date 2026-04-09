@@ -1,0 +1,3 @@
+## 2024-04-09 - Global Event Listener Leaks in SPAs
+**Learning:** In Vue SPAs (or React/Angular), registering global `window` event listeners (like `scroll`) inside a component without explicitly unregistering them in the teardown hook (e.g., `unmounted()`) causes significant memory leaks. The event callback remains active in memory, firing layout measurements (`getBoundingClientRect`) even when navigating to unrelated routes, severely degrading performance.
+**Action:** Always verify that every `addEventListener` on the `window` or `document` inside a component has a corresponding `removeEventListener` in the `unmounted` lifecycle hook. Store bounded functions if needed to ensure correct removal.

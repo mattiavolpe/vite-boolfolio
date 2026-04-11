@@ -1,0 +1,3 @@
+## 2024-04-11 - Vue Async Form Feedback
+**Learning:** Native form validation (HTML5 `required`, correct `type`) handles early errors locally without JS, but asynchronous submissions in Vue often lack implicit visual feedback during the request cycle and accessible feedback after. Adding a reactive `isSending` flag to disable submission buttons combined with a `role="status"` live region for the response ensures both state clarity and screen reader accessibility for async operations.
+**Action:** Always implement client-side native validation before async requests. During async submissions, explicitly disable the submit button (e.g., `isSending = true`) and present completion feedback via a reactive ARIA live region.

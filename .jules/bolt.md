@@ -1,0 +1,3 @@
+## 2024-05-14 - [Vue Scroll Event Throttling]
+**Learning:** Attaching raw global scroll listeners in Vue components, especially those querying reactive `state` properties or calling layout-thrashing methods like `getClientRects()`, can cause significant main thread blocking and frame drops.
+**Action:** Always throttle scroll events using `requestAnimationFrame`, pass `{ passive: true }` when possible to avoid blocking scrolling, replace `getClientRects()[0]` with `getBoundingClientRect()`, and always remember to `cancelAnimationFrame` in `unmounted()` lifecycle to prevent memory leaks and ghost updates after route changes.

@@ -1,0 +1,3 @@
+## 2024-04-12 - Form Submission Accessibility Pattern
+**Learning:** Asynchronous Vue form submissions must explicitly set `isSending` states to disable the submit button and display immediate, accessible feedback. Without this, users receive no indication their action was registered, leading to potential duplicate submissions and confusion. Also, using standard HTML5 input attributes (like `type="email"` and `required`) natively handles basic validation efficiently.
+**Action:** Always wrap async API calls in form handlers with `try/finally` blocks to toggle `isSending` state correctly, disable the submit button, and provide `role="status" aria-live="polite"` feedback for screen readers for the result. Ensure appropriate `type` and `required` attributes are set.

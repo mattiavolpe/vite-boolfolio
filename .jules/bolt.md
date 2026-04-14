@@ -1,0 +1,3 @@
+## 2024-05-24 - Unthrottled Global Scroll Listeners
+**Learning:** Attaching an unthrottled, non-passive global scroll listener that continuously reads cross-component DOM layout (`getClientRects()[0].y`) without null checks causes significant synchronous layout thrashing and processing overhead. If not removed on unmount, it causes a memory leak and continues firing on other routes where elements may be null, leading to crashes.
+**Action:** Always extract scroll logic into a named handler initialized in `created()`, attach with `{ passive: true }`, throttle DOM reads/mutations using `requestAnimationFrame`, use `getBoundingClientRect()` safely with null checks, and always remove the listener and cancel the animation frame in `unmounted()`.

@@ -1,0 +1,3 @@
+## 2024-05-17 - Asynchronous Form UX and Accessibility
+**Learning:** In standard Vue SPA forms relying on Axios for submission, a lack of loading state and explicit a11y feedback regions results in a poor experience, especially for screen reader users who do not know if the form actually submitted. Further, the project used a non-standard `type="mail"` which breaks native validation.
+**Action:** When working on asynchronous forms, always implement an `isSending` state to disable the submit button (preventing double clicks) and render an accessible feedback container (`role="status" aria-live="polite"`) for success/error messages. Always prefer native HTML validation (`type="email"`, `required`) over custom JS validation when possible.

@@ -1,0 +1,3 @@
+## 2024-04-16 - Async Form Submission States
+**Learning:** Adding an explicit loading state to forms during async submissions improves the user experience by providing immediate feedback. Using `role="status"` and `aria-live="polite"` makes these states accessible to screen readers, allowing users to understand when the action has completed successfully or failed.
+**Action:** When creating forms that make asynchronous calls, always implement an `isSending` state to disable the submit button and provide clear, accessible post-submission feedback.

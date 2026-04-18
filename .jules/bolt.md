@@ -1,0 +1,3 @@
+## 2024-04-18 - Unthrottled Global Scroll Events
+**Learning:** Unthrottled global event listeners (like scroll/resize) mapped to simple `getClientRects()[0].y` calls in Vue components lead to layout thrashing and potential unhandled exceptions if DOM elements are suddenly unmounted. Furthermore, adding these global listeners without teardown (`unmounted()`) causes memory leaks when navigating between SPA views.
+**Action:** Always use `requestAnimationFrame` for scroll/resize throttling, implement proper teardown by cancelling animation frames and removing listeners in `unmounted()`, and prefer `getBoundingClientRect().top` combined with explicit null checks for element references.

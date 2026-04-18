@@ -1,0 +1,3 @@
+## 2024-04-18 - Form Validation and State Accessibility
+**Learning:** Using invalid input types like `type="mail"` breaks native browser validation and prevents mobile devices from showing the correct keyboard. In addition, missing loading states and post-submission feedback makes async forms difficult to use, especially for screen reader users.
+**Action:** Always use standard HTML5 attributes (`type="email"`, `required`) for native validation. Implement an `isSending` state to disable the submit button, and provide accessible post-submission feedback using `role="status"` and `aria-live="polite"`.

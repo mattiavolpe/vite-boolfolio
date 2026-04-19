@@ -1,0 +1,4 @@
+
+## 2024-05-18 - Unthrottled Scroll Listeners and Memory Leaks
+**Learning:** Attaching global window `scroll` event listeners inside a Vue component's `mounted` hook without removing them in `unmounted` creates memory leaks and causes the listener to fire redundantly on other routes. Additionally, calling layout measurements like `getClientRects()` synchronously within an unthrottled scroll event handler can cause severe main-thread blocking jank and potential runtime crashes if the element is unrendered.
+**Action:** Always throttle scroll listeners using `requestAnimationFrame`, store the listener as a component method, initialize non-reactive tracking variables in `created()`, use `getBoundingClientRect().y` safely with null-checks, use `{ passive: true }`, and always clean up by removing the listener and cancelling the animation frame in the `unmounted` lifecycle hook.

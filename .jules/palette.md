@@ -1,0 +1,3 @@
+## 2024-05-24 - Fix invalid mail input type and missing async feedback
+**Learning:** The project used an invalid `type="mail"` on input fields which breaks native browser validation and prevents proper mobile keyboard display. Also, the async contact form lacked loading feedback or error/success indication making the user unsure of whether the submission succeeded.
+**Action:** Always use standard HTML5 `type="email"` for email inputs to enable native browser validation and proper software keyboards on mobile. Always implement an `isSending` state to disable the submit button, and provide accessible post-submission feedback using `role="status"` and `aria-live="polite"`.

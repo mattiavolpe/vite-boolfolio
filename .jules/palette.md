@@ -1,0 +1,3 @@
+## 2024-04-21 - Invalid input types and missing async feedback
+**Learning:** Using `type="mail"` is invalid HTML5 and breaks native browser validation, particularly on mobile devices where it prevents the correct keyboard from showing. Additionally, lacking an `isSending` state and a feedback message post-submission leaves the user unaware if their action succeeded, causing confusion.
+**Action:** Always use standard HTML5 types (e.g., `type="text"`, `type="email"`) and implement async form feedback states (loading, success/error) with accessibility attributes (`role="status"`, `aria-live="polite"`) to provide proper feedback to users.

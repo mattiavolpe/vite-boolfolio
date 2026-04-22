@@ -1,0 +1,3 @@
+## 2024-05-16 - Using invalid input types breaks accessibility
+**Learning:** In the contact form, using `type="mail"` instead of `type="email"` or `type="text"` breaks native browser validation and prevents mobile devices from displaying the appropriate keyboard, harming accessibility and overall user experience. Furthermore, not providing asynchronous feedback on forms leaves users confused about the status of their actions.
+**Action:** Always use standard HTML5 form attributes (like `type="email"` and `required`) to handle client-side validation natively, and implement an `isSending` state along with accessible post-submission feedback (using `role="status"` and `aria-live="polite"`) to disable the submit button and inform users of the result.

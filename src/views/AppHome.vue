@@ -15,32 +15,57 @@ export default {
   data() {
     return {
       state,
+      scrollFrameId: null, // Store animation frame ID for cancellation
     }
   },
-  mounted() {
-    window.addEventListener('scroll', () => {
-      if(this.$route.name === "home") {
-        if(state.footerEl.getClientRects()[0].y <= 90) {
-          state.headerEl.classList.remove("bg_dark_blue_custom");
-          state.headerEl.classList.add("bg_dark_custom");
-        } else if(state.projectsSectionEl.getClientRects()[0].y <= 65) {
-          state.headerEl.classList.remove("bg_dark_custom");
-          state.headerEl.classList.add("bg_dark_blue_custom");
-        } else if(state.skillsSectionEl.getClientRects()[0].y <= 65) {
-          state.headerEl.classList.remove("bg_dark_blue_custom");
-          state.headerEl.classList.add("bg_dark_custom");
-        } else if(state.aboutSectionEl.getClientRects()[0].y <= 65) {
-          state.headerEl.classList.remove("bg_dark_custom");
-          state.headerEl.classList.add("bg_dark_blue_custom");
-        } else {
+  methods: {
+    handleScroll() {
+      // Use requestAnimationFrame to throttle scroll event handling
+      // This prevents the browser from doing too much work per frame
+      if (this.scrollFrameId) {
+        cancelAnimationFrame(this.scrollFrameId);
+      }
+
+      this.scrollFrameId = requestAnimationFrame(() => {
+        if (this.$route.name === "home") {
+          // Add null checks to prevent runtime errors if elements aren't mounted yet
+          if (!state.headerEl) return;
+
+          // Use getBoundingClientRect() which is generally more performant and standard
+          // than getClientRects()[0] for single elements
+          if (state.footerEl && state.footerEl.getBoundingClientRect().y <= 90) {
+            state.headerEl.classList.remove("bg_dark_blue_custom");
+            state.headerEl.classList.add("bg_dark_custom");
+          } else if (state.projectsSectionEl && state.projectsSectionEl.getBoundingClientRect().y <= 65) {
+            state.headerEl.classList.remove("bg_dark_custom");
+            state.headerEl.classList.add("bg_dark_blue_custom");
+          } else if (state.skillsSectionEl && state.skillsSectionEl.getBoundingClientRect().y <= 65) {
+            state.headerEl.classList.remove("bg_dark_blue_custom");
+            state.headerEl.classList.add("bg_dark_custom");
+          } else if (state.aboutSectionEl && state.aboutSectionEl.getBoundingClientRect().y <= 65) {
+            state.headerEl.classList.remove("bg_dark_custom");
+            state.headerEl.classList.add("bg_dark_blue_custom");
+          } else {
+            state.headerEl.classList.remove("bg_dark_blue_custom");
+            state.headerEl.classList.add("bg_dark_custom");
+          }
+        } else if (state.headerEl) {
           state.headerEl.classList.remove("bg_dark_blue_custom");
           state.headerEl.classList.add("bg_dark_custom");
         }
-      } else {
-        state.headerEl.classList.remove("bg_dark_blue_custom");
-        state.headerEl.classList.add("bg_dark_custom");
-      }
-    })
+      });
+    }
+  },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  unmounted() {
+    // Clean up global event listener to prevent memory leaks and
+    // unintended execution when navigating to other routes
+    window.removeEventListener('scroll', this.handleScroll);
+    if (this.scrollFrameId) {
+      cancelAnimationFrame(this.scrollFrameId);
+    }
   }
 }
 </script>

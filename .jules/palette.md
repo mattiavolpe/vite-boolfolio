@@ -1,0 +1,3 @@
+## 2024-04-23 - Form Type and Submission Feedback
+**Learning:** Using invalid HTML5 form types like `type="mail"` breaks native browser validation and prevents mobile devices from displaying the appropriate keyboard (e.g., email keyboard). Also, long async form submissions require explicit loading states and user feedback (success/error messages) for good UX.
+**Action:** Always use valid semantic HTML form attributes (`type="email"`, `type="text"`, `required`) and ensure async actions have visual loading indicators and user-visible success/error results.

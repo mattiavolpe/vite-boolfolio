@@ -1,0 +1,3 @@
+## 2024-04-24 - HTML Input Types and Async Feedback
+**Learning:** Invalid HTML input types (e.g., `type="mail"`) break native browser validation and prevent mobile devices from showing the correct keyboard. In addition, asynchronous forms must provide loading states and clear feedback (success/error messages) to prevent double submissions and user confusion.
+**Action:** Always use standard HTML5 form attributes (like `type="email"` and `required`) to handle client-side validation natively before making asynchronous API calls, and explicitly include loading and feedback states when dealing with async API submissions.

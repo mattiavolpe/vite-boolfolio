@@ -1,0 +1,3 @@
+## 2024-05-18 - Async Form UX Enhancements
+**Learning:** Asynchronous form submissions (e.g., via axios) must include explicit loading states (like disabling the submit button) and clear success/error feedback messages to prevent double submissions and improve user experience. Furthermore, using correct HTML5 form attributes like `type="email"` and `required` provides native browser validation before asynchronous requests are fired, whereas invalid types like `type="mail"` break this functionality.
+**Action:** Always ensure async forms have `isSubmitting` states that disable buttons and change button text, provide clear visual feedback upon success/error, and utilize standard HTML5 inputs correctly to handle client-side validation natively.

@@ -1,0 +1,3 @@
+## 2024-06-25 - Scroll Listener Layout Thrashing & Memory Leaks
+**Learning:** Attaching a scroll listener directly without `requestAnimationFrame` and using `getClientRects()[0]` causes significant layout thrashing on every scroll event. Additionally, not cleaning up the listener in `unmounted` leads to memory leaks and background processing when the user navigates away.
+**Action:** Always throttle scroll listeners using `requestAnimationFrame`, use `getBoundingClientRect()` which is faster, specify `{ passive: true }` to not block scrolling, and always clean up using `removeEventListener` and `cancelAnimationFrame` in component teardown.

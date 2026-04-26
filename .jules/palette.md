@@ -1,0 +1,3 @@
+## 2024-04-26 - Form Accessibility and UX Feedback
+**Learning:** Forms must use correct standard HTML5 `type` attributes (e.g. `type="email"` instead of invalid `type="mail"`) for native mobile keyboards and client-side validation to function properly. Furthermore, asynchronous form submissions (via Axios) critically need explicit `disabled` loading states and clear success/error UI feedback to prevent user confusion and double submissions.
+**Action:** Always check form inputs for valid HTML5 types and ensure proper `required` attributes are set. Mandate loading spinners, disabled states, and explicit toast/alert messages on all async form submissions.

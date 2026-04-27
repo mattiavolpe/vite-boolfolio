@@ -1,0 +1,3 @@
+## 2024-04-27 - Proper Form Types and Async Feedback
+**Learning:** Using invalid input types (like `type="mail"`) breaks native browser validation and mobile keyboard integration. Furthermore, asynchronous form submissions without explicit loading and response states leave users uncertain if their action succeeded, leading to duplicate submissions.
+**Action:** Always use standard HTML5 form types (`text`, `email`, `tel`, etc.) and the `required` attribute for client-side validation. Explicitly handle async feedback by adding `disabled` loading states to submit buttons and displaying clear success/error notifications after the request completes.

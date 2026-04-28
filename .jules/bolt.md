@@ -1,0 +1,3 @@
+## 2024-04-28 - Missing Lifecycle Cleanup for Global Event Listeners
+**Learning:** Found a critical anti-pattern where a global `window.addEventListener('scroll')` was attached in `mounted()` but never cleaned up in `unmounted()`. In a Single Page Application (SPA) with routing, this causes the event listener to persist and accumulate cross-route memory leaks, running unnecessary code on pages where the referenced elements might not even exist.
+**Action:** Always pair global event listener registrations (like `window.addEventListener`) with their corresponding cleanup in the `unmounted` lifecycle hook to ensure proper garbage collection and prevent cross-route side effects.

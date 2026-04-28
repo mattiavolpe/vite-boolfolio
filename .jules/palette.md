@@ -1,0 +1,4 @@
+## 2024-04-28 - Async Form UX Enhancements
+
+**Learning:** Forms submitting asynchronously via `axios` can easily cause double submissions if the submit button isn't explicitly disabled, confusing users. Also, using incorrect input types (like `type="mail"`) breaks native browser validation and mobile keyboard configurations, which leads to degraded user experience.
+**Action:** When implementing forms in Vue components that submit asynchronously, always bind a reactive `isSubmitting` state to the submit button's `:disabled` attribute. Provide immediate visual feedback with loading states, success messages, and error banners. Additionally, rigorously check HTML5 input types to ensure native validation features (`type="email"`, `required`) operate correctly.

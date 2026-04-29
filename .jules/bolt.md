@@ -1,0 +1,3 @@
+## 2024-03-24 - Unthrottled Global Scroll Event Listener
+**Learning:** Found an unthrottled global scroll listener making DOM measurements (`getClientRects()[0]`) without `{ passive: true }` in `AppHome.vue`. This causes performance drops during scrolling and blocks the main thread. Additionally, it lacked component unmount cleanup, causing potential memory leaks.
+**Action:** When implementing scroll, wheel, or touchstart listeners, always throttle them using `requestAnimationFrame`, add `{ passive: true }` to not block the main thread, use the faster `getBoundingClientRect()`, and always clean up event listeners in the `unmounted` lifecycle hook.

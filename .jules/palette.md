@@ -1,0 +1,3 @@
+## 2024-04-30 - Form Input Types and Async Submission Feedback
+**Learning:** Using invalid HTML form types (like `type="mail"` instead of `type="email"`) breaks native browser validation and prevents the proper mobile keyboard from showing. Additionally, asynchronous form submissions (like via Axios) MUST include an explicit loading state to disable the submit button (preventing double submissions) and provide clear success/error feedback messages.
+**Action:** Always use standard HTML5 form attributes (`type="email"`, `type="text"`, `required`) to handle client-side validation natively before making asynchronous API calls, and always explicitly manage loading and success/error states for async form submissions to improve the UX and accessibility of the interface.

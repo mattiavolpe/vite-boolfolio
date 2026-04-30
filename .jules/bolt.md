@@ -1,0 +1,3 @@
+## 2024-04-30 - Optimize global scroll listeners and DOM queries
+**Learning:** Found an unthrottled global scroll event listener in `AppHome.vue` that fired on every scroll tick without `{ passive: true }`, causing main thread jank. Additionally, it used `getClientRects()[0]` without existence checks on globally stored DOM elements, risking null reference errors and performing slower than `getBoundingClientRect()`. Finally, it was not cleaned up on unmount, causing a memory leak and continuing to fire on other pages.
+**Action:** Throttle scroll listeners with `requestAnimationFrame`, add `{ passive: true }`, clean up with `removeEventListener` in `unmounted`, and prefer `getBoundingClientRect()` over `getClientRects()[0]` with proper existence checks.

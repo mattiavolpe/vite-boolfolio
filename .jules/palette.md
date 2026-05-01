@@ -1,0 +1,3 @@
+## 2024-05-01 - Form Input Types and Feedback
+**Learning:** Using invalid HTML5 input types (like `type="mail"` instead of `type="email"`) breaks native browser validation and prevents mobile devices from displaying the correct keyboard (e.g., the one with the '@' symbol). Additionally, asynchronous form submissions without feedback lead to user confusion and duplicate submissions.
+**Action:** Always strictly adhere to standard HTML5 input types (`email`, `text`, etc.), add the `required` attribute for client-side validation, and explicitly manage loading states (disabling submit buttons) and success/error feedback messages to enhance both accessibility and user experience.

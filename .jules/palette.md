@@ -1,0 +1,3 @@
+## 2024-05-02 - Form Validation Types
+**Learning:** In the contact form, using invalid types like `type="mail"` breaks native browser validation and prevents mobile devices from showing the correct keyboard. Using standard HTML5 attributes like `type="email"` and `required` provides better native validation and user experience.
+**Action:** Always use valid standard HTML5 form attributes to handle client-side validation natively.

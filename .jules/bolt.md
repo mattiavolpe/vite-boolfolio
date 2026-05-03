@@ -1,0 +1,3 @@
+## 2024-05-03 - Optimize scroll event handlers in Vue
+**Learning:** Found a major performance bottleneck where a global scroll listener on `window` was performing expensive DOM reads using `getClientRects()[0]` synchronously on every scroll event, which causes layout thrashing. Also, the event listener was not passive, potentially blocking the main thread during scroll.
+**Action:** Always use `requestAnimationFrame` to throttle scroll handlers, use `getBoundingClientRect()` which is more efficient than `getClientRects()[0]`, add `{ passive: true }` when registering global scroll/touch listeners, and make sure to explicitly remove listeners and cancel pending animation frames in Vue's `unmounted` lifecycle hook.

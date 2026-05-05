@@ -1,0 +1,3 @@
+## 2024-05-05 - Native validation and async feedback
+**Learning:** Using invalid input types (like `type="mail"` instead of `type="email"`) bypasses native browser validation and prevents mobile devices from displaying the correct keyboard. Additionally, asynchronous form submissions must provide clear feedback (loading states, success/error messages) to prevent double submissions and confusion.
+**Action:** Always use standard HTML5 form attributes (`type="email"`, `type="text"`, `required`) for native validation. Implement `isSubmitting`, `submitSuccess`, and `submitError` states for any async form submission.

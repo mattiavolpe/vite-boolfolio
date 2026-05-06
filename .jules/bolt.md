@@ -1,0 +1,3 @@
+## 2026-05-06 - Throttled scroll event listeners using requestAnimationFrame
+**Learning:** Unthrottled scroll listeners that perform layout reads (like `getClientRects()[0].y`) cause massive main thread blocking and layout thrashing.
+**Action:** Wrap scroll listener logic in `requestAnimationFrame` for 60fps execution limit, add `{ passive: true }` to prevent blocking scrolling, and use `getBoundingClientRect().top` instead of `getClientRects()[0].y` for safer and more performant layout reads. Always clean up these listeners and cancel animation frames in the `unmounted` lifecycle hook to prevent memory leaks.

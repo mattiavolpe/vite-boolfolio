@@ -1,0 +1,3 @@
+## 2024-05-09 - Form UX and Accessibility Enhancements
+**Learning:** Adding explicit HTML5 validation types (like `type="email"`) is crucial to trigger native browser behaviors, especially appropriate mobile keyboards. Visual "required" indicators like asterisks should use `aria-hidden="true"` so screen readers don't read out "star". Asynchronous form submission needs explicit loading states (disabling submit button and text changes) to avoid double-submission, alongside clear success/error alerts.
+**Action:** Always use appropriate input types and `required` attributes for client-side validation. Wrap asterisks in `span aria-hidden="true"`. On async forms, disable the submit button and provide feedback via `v-if` alerts based on API responses.

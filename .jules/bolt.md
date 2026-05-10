@@ -1,0 +1,4 @@
+
+## 2024-05-10 - Optimizing Scroll Event Listeners in Vue
+**Learning:** Attaching an unthrottled scroll event listener without the `{ passive: true }` option blocks the main thread, leading to jittery scrolling. Furthermore, using `getClientRects()[0]` is less efficient than `getBoundingClientRect()` for position checks. Finally, failing to remove global event listeners (like `window.addEventListener`) and cancel pending `requestAnimationFrame` updates in a Vue component's `unmounted` lifecycle hook causes memory leaks and unintended background executions when navigating between routes.
+**Action:** When working with continuous global events (scroll, resize, etc.) in Vue, always use `{ passive: true }` if applicable, throttle logic via `requestAnimationFrame`, prefer `getBoundingClientRect()` for coordinate checks, and strictly ensure cleanup using `window.removeEventListener` and `cancelAnimationFrame` within the `unmounted()` hook.

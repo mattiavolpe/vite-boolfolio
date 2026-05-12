@@ -1,0 +1,3 @@
+## 2024-05-12 - Form Submission Accessibility Pattern
+**Learning:** This application lacks inherent asynchronous submission loading states and feedback messaging in its form components. Adding explicit success/error states directly manipulated by the component logic greatly improves immediate feedback without requiring page reloads or external toast libraries. We should always use valid input types (like `type="text"` instead of `type="mail"` for names) to trigger correct mobile keyboards.
+**Action:** When working on form interactions in this app, always ensure that disabled submit states during async actions (`isSending`) and ARIA-hidden required indicators (`<span aria-hidden="true">*</span>`) are standard practice.

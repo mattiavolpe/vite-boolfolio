@@ -1,0 +1,3 @@
+## 2024-05-16 - Form HTML5 Input Types and Validation
+**Learning:** Using invalid HTML5 input types like `type="mail"` instead of `type="email"` breaks native client-side validation and prevents mobile devices from triggering the correct virtual keyboard (e.g., showing the '@' key).
+**Action:** Always use standard HTML5 form validation types (`email`, `text`, `tel`, etc.) to ensure cross-device consistency and native validation support.

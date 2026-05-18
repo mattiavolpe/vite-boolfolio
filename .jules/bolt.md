@@ -1,0 +1,3 @@
+## 2024-05-18 - Throttle Scroll Events
+**Learning:** High-frequency event listeners (like 'scroll') can negatively impact performance if they execute expensive operations on every frame, especially when checking positions of multiple elements like the global custom state approach used in `AppHome.vue` in this repo for dynamic header color changes. In this codebase, accessing `getClientRects()[0]` without throttling was causing layout thrashing.
+**Action:** Use `requestAnimationFrame` to throttle scroll event handling, replace `getClientRects()[0].y` with the more efficient `getBoundingClientRect().y`, add `{ passive: true }` to the listener to not block main thread scrolling, and make sure to remove listeners inside `unmounted` lifecycle.

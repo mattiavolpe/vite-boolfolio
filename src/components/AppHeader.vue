@@ -26,13 +26,13 @@ export default {
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
           <ul class="navbar-nav text-center ms-auto">
             <li class="nav-item">
-              <router-link :to="{name: 'home'}" class="nav-link text_light_custom fw-medium" aria-current="page">Home<span class="visually-hidden">(current)</span></router-link>
+              <router-link :to="{name: 'home'}" class="nav-link text_light_custom fw-medium">Home</router-link>
             </li>
             <li class="nav-item">
-              <router-link :to="{name: 'projects'}" class="nav-link text_light_custom fw-medium" aria-current="page">Projects</router-link>
+              <router-link :to="{name: 'projects'}" class="nav-link text_light_custom fw-medium">Projects</router-link>
             </li>
             <li class="nav-item">
-              <router-link :to="{name: 'contact'}" class="nav-link text_light_custom fw-medium" aria-current="page">Contact me</router-link>
+              <router-link :to="{name: 'contact'}" class="nav-link text_light_custom fw-medium">Contact me</router-link>
             </li>
           </ul>
         </div>

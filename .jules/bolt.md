@@ -1,0 +1,3 @@
+## 2024-05-30 - Global Scroll Listener Memory Leak and Null Safety
+**Learning:** Rapid navigation causes memory leaks if `removeEventListener` is missing on global scroll listeners. The custom global `state.js` pattern also necessitates null-checks during active scroll events when elements might be unmounted, as `state` holds references to DOM elements that are only initialized when their respective components mount. `getClientRects()[0]` is less efficient than `getBoundingClientRect()`.
+**Action:** Always use `{ passive: true }`, `requestAnimationFrame`, `getBoundingClientRect()`, null-safety checks for global state DOM elements, and ensure cleanup via `removeEventListener` and `cancelAnimationFrame` in the `unmounted()` hook.

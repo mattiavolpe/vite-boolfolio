@@ -18,29 +18,46 @@ export default {
     }
   },
   mounted() {
-    window.addEventListener('scroll', () => {
-      if(this.$route.name === "home") {
-        if(state.footerEl.getClientRects()[0].y <= 90) {
-          state.headerEl.classList.remove("bg_dark_blue_custom");
-          state.headerEl.classList.add("bg_dark_custom");
-        } else if(state.projectsSectionEl.getClientRects()[0].y <= 65) {
-          state.headerEl.classList.remove("bg_dark_custom");
-          state.headerEl.classList.add("bg_dark_blue_custom");
-        } else if(state.skillsSectionEl.getClientRects()[0].y <= 65) {
-          state.headerEl.classList.remove("bg_dark_blue_custom");
-          state.headerEl.classList.add("bg_dark_custom");
-        } else if(state.aboutSectionEl.getClientRects()[0].y <= 65) {
-          state.headerEl.classList.remove("bg_dark_custom");
-          state.headerEl.classList.add("bg_dark_blue_custom");
+    // ⚡ Bolt: Optimize scroll listener with passive flag, requestAnimationFrame, and getBoundingClientRect
+    this.scrollHandler = () => {
+      if (this.scrollAnimationFrame) {
+        cancelAnimationFrame(this.scrollAnimationFrame);
+      }
+      this.scrollAnimationFrame = requestAnimationFrame(() => {
+        if (!state.headerEl) return;
+
+        if (this.$route.name === "home") {
+          if (state.footerEl && state.footerEl.getBoundingClientRect().y <= 90) {
+            state.headerEl.classList.remove("bg_dark_blue_custom");
+            state.headerEl.classList.add("bg_dark_custom");
+          } else if (state.projectsSectionEl && state.projectsSectionEl.getBoundingClientRect().y <= 65) {
+            state.headerEl.classList.remove("bg_dark_custom");
+            state.headerEl.classList.add("bg_dark_blue_custom");
+          } else if (state.skillsSectionEl && state.skillsSectionEl.getBoundingClientRect().y <= 65) {
+            state.headerEl.classList.remove("bg_dark_blue_custom");
+            state.headerEl.classList.add("bg_dark_custom");
+          } else if (state.aboutSectionEl && state.aboutSectionEl.getBoundingClientRect().y <= 65) {
+            state.headerEl.classList.remove("bg_dark_custom");
+            state.headerEl.classList.add("bg_dark_blue_custom");
+          } else {
+            state.headerEl.classList.remove("bg_dark_blue_custom");
+            state.headerEl.classList.add("bg_dark_custom");
+          }
         } else {
           state.headerEl.classList.remove("bg_dark_blue_custom");
           state.headerEl.classList.add("bg_dark_custom");
         }
-      } else {
-        state.headerEl.classList.remove("bg_dark_blue_custom");
-        state.headerEl.classList.add("bg_dark_custom");
-      }
-    })
+      });
+    };
+    window.addEventListener('scroll', this.scrollHandler, { passive: true });
+  },
+  unmounted() {
+    if (this.scrollHandler) {
+      window.removeEventListener('scroll', this.scrollHandler);
+    }
+    if (this.scrollAnimationFrame) {
+      cancelAnimationFrame(this.scrollAnimationFrame);
+    }
   }
 }
 </script>

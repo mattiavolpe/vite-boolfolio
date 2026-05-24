@@ -1,0 +1,3 @@
+## 2024-05-24 - Global DOM Elements in state.js
+**Learning:** This codebase uses a custom global state pattern (src/state.js) to manage DOM elements (e.g., state.headerEl). Because these are populated on component mount, global event listeners (like scroll) can fire during rapid navigation when these elements are temporarily null, causing crashes.
+**Action:** Always include strict null-safety checks (e.g., if (!state.headerEl)) when accessing globally managed DOM elements within asynchronous or global event handlers to prevent runtime errors during navigation.

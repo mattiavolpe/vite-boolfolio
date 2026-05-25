@@ -1,0 +1,3 @@
+## 2024-05-25 - Scroll Event Performance & Memory Leak
+**Learning:** In AppHome.vue, the scroll event listener caused layout thrashing by calling `getClientRects()[0]` repeatedly without throttling, lacked passive event listener options, and most importantly, was never cleaned up, causing memory leaks during navigation. Accessing DOM elements managed via `src/state.js` also required null-safety checks to prevent runtime errors.
+**Action:** Always use `{ passive: true }`, prefer `getBoundingClientRect()`, throttle with `requestAnimationFrame`, add null checks for global state elements, and clean up via `removeEventListener` in the `unmounted()` hook.

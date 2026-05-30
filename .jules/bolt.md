@@ -1,0 +1,3 @@
+## 2024-06-03 - AppHome Scroll Listener Optimization
+**Learning:** In Vue apps interacting with custom global state objects (e.g., `state.headerEl`), using raw `window.addEventListener('scroll')` with synchronous layout recalculations (`getClientRects()[0]`) causes unnecessary layout thrashing and main thread blocking, which is especially critical on long scrollable pages like the home page.
+**Action:** Always throttle scroll event listeners using `requestAnimationFrame`, prefer the more efficient `getBoundingClientRect()`, provide the `{ passive: true }` option, include null-safety checks when accessing DOM elements managed globally (like `state.footerEl`), and explicitly remove event listeners via `unmounted()` hook to prevent memory leaks across route navigation.

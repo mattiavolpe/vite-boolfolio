@@ -1,0 +1,3 @@
+## 2024-05-24 - Global DOM Elements & Scroll Listeners
+**Learning:** The application uses a custom global `state.js` for storing DOM references (`headerEl`, `footerEl`, etc.). These can be null if a component hasn't mounted, and listening to global events like scroll without cleaning them up on unmount or null-checking causes memory leaks and runtime jank.
+**Action:** Always wrap DOM reference access with null-checks, use `requestAnimationFrame` for scroll events, specify `{ passive: true }`, and implement cleanups in `unmounted()` when dealing with Vue options API components interacting with global `state.js`.

@@ -1,0 +1,3 @@
+## 2024-05-24 - Optimized Global Scroll Listener
+**Learning:** Found a memory leak and performance bottleneck in a Vue component where a global window scroll listener was missing removeEventListener in unmounted, lacked requestAnimationFrame throttling, and used the slower getClientRects()[0] instead of getBoundingClientRect() without { passive: true }. Furthermore, accessing global element refs from state inside scroll handlers can throw errors during initial render if null checks are omitted.
+**Action:** Always throttle scroll events using requestAnimationFrame, use getBoundingClientRect() for coordinates, add { passive: true } to the event listener, implement null-safety checks for shared DOM elements, and crucially, clean up listeners in the unmounted hook.

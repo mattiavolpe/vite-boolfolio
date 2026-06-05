@@ -1,0 +1,3 @@
+## 2025-01-20 - Global event listener optimization in Vue 3
+**Learning:** For global event listeners like 'scroll' in Vue components, it's a performance necessity to use the `{ passive: true }` option, prefer `getBoundingClientRect()` over `getClientRects()[0]` for efficient coordinate retrieval, explicitly throttle with `requestAnimationFrame`, and clean up via `removeEventListener` and `cancelAnimationFrame` in the `unmounted()` hook to prevent memory leaks during navigation.
+**Action:** Always include `{ passive: true }`, `requestAnimationFrame`, and `unmounted()` cleanup for global scroll listeners in Vue.

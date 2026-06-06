@@ -1,0 +1,3 @@
+## 2026-06-06 - AppHome Scroll Listener Optimization
+**Learning:** Found a scroll event listener in AppHome.vue using `getClientRects()[0].y` synchronously without throttling, passive flag, cleanup, or null-safety checks on global state DOM elements, causing unnecessary recalculations and potential memory leaks.
+**Action:** Always optimize global event listeners in Vue by using `{ passive: true }`, explicitly throttling with `requestAnimationFrame`, preferring `getBoundingClientRect()`, and cleaning up in `unmounted()` hook.

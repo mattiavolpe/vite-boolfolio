@@ -1,0 +1,3 @@
+## 2025-06-08 - Fixed Invalid Form Input Types & Added Validation
+**Learning:** Found custom/invalid HTML input types (e.g., `type="mail"`) being used in the contact form, which breaks client-side validation and mobile keyboard triggering. Added proper `type="email"` and HTML5 `required` attributes. Also implemented an accessible visual required indicator pattern using `<span aria-hidden="true" class="text-danger">*</span>` to avoid redundant screen reader announcements while providing clear visual cues.
+**Action:** Always verify form input types against standard HTML5 specifications. Use `aria-hidden="true"` on purely visual required indicators like asterisks to enhance accessibility without cluttering screen reader output.

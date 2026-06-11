@@ -1,0 +1,3 @@
+## 2026-06-11 - Optimize Vue Scroll Listener
+**Learning:** Global scroll event listeners that synchronously read DOM layout properties (like `getClientRects()[0].y`) without throttling cause layout thrashing and poor scroll performance. Furthermore, failing to unbind them in Vue's `unmounted` hook causes memory leaks and errors when elements are destroyed.
+**Action:** Always throttle scroll listeners using `requestAnimationFrame`, use `{ passive: true }` to decouple from the scroll thread, use `getBoundingClientRect()` safely with null checks, and explicitly cleanup event listeners and rAF IDs in the `unmounted` lifecycle hook.

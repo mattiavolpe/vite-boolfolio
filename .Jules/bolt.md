@@ -1,0 +1,3 @@
+## 2024-05-18 - Missing Scroll Listener Cleanup Causes Memory Leaks
+**Learning:** In this Vue app's architecture, global `window` event listeners (like 'scroll') added in a component's `mounted` hook persist even after the component is destroyed via route navigation. Furthermore, attempting to access DOM elements stored in a custom global state object (`state.js`) after they have been unmounted throws unhandled exceptions during the scroll event.
+**Action:** Always clean up global event listeners in the `unmounted()` hook, ensure any pending `requestAnimationFrame` calls are canceled, and include null-safety checks when accessing globally managed DOM elements.

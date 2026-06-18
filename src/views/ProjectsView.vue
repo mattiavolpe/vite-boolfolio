@@ -139,7 +139,8 @@ export default {
         PROJECTS
     </SectionTitle>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-center g-3" v-if="!loading">
-        <div class="col" v-for="project in projects">
+        <!-- ⚡ Bolt Performance: Added :key on v-for loop to improve VNode tracking during updates -->
+        <div class="col" v-for="project in projects" :key="project.slug">
             <ProjectCard :project="project" :host="state.host" :imagesPath="state.imagesPath" />
             <h5 class="text_accent_custom text-center text-uppercase pt-1 mb-0 fw-bold">{{ project.name }}</h5>
         </div>

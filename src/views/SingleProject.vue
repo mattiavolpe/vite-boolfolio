@@ -57,7 +57,8 @@ export default {
     <template v-if="project.technologies">
       <h3 class="text_accent_custom fw-bold">Used technologies:</h3>
       <ul class="fw-bold list-unstyled row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 g-3 justify-content-center"> 
-        <li class="col" v-for="technology in project.technologies">
+        <!-- ⚡ Bolt Performance: Ensured unique :key attribute on v-for loop for faster DOM patching -->
+        <li class="col" v-for="technology in project.technologies" :key="technology.name">
           <div class="technologyWrapper rounded-3 p-2">
             <img :src="state.host + state.imagesPath + technology.logo" :alt="technology.name + ' Logo'">
             <p class="mb-0 mt-2 fw-normal">{{ technology.name }}</p>

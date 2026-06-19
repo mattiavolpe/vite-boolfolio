@@ -18,29 +18,47 @@ export default {
     }
   },
   mounted() {
-    window.addEventListener('scroll', () => {
-      if(this.$route.name === "home") {
-        if(state.footerEl.getClientRects()[0].y <= 90) {
-          state.headerEl.classList.remove("bg_dark_blue_custom");
-          state.headerEl.classList.add("bg_dark_custom");
-        } else if(state.projectsSectionEl.getClientRects()[0].y <= 65) {
-          state.headerEl.classList.remove("bg_dark_custom");
-          state.headerEl.classList.add("bg_dark_blue_custom");
-        } else if(state.skillsSectionEl.getClientRects()[0].y <= 65) {
-          state.headerEl.classList.remove("bg_dark_blue_custom");
-          state.headerEl.classList.add("bg_dark_custom");
-        } else if(state.aboutSectionEl.getClientRects()[0].y <= 65) {
-          state.headerEl.classList.remove("bg_dark_custom");
-          state.headerEl.classList.add("bg_dark_blue_custom");
-        } else {
-          state.headerEl.classList.remove("bg_dark_blue_custom");
-          state.headerEl.classList.add("bg_dark_custom");
-        }
-      } else {
-        state.headerEl.classList.remove("bg_dark_blue_custom");
-        state.headerEl.classList.add("bg_dark_custom");
+    this._ticking = false;
+    this._scrollHandler = () => {
+      if (!this._ticking) {
+        this._animationFrameId = window.requestAnimationFrame(() => {
+          // ⚡ Bolt Performance Optimization: Throttled scroll event with requestAnimationFrame,
+          // passive listener, getBoundingClientRect(), and null safety checks.
+          if(this.$route.name === "home" && state.headerEl && state.footerEl && state.projectsSectionEl && state.skillsSectionEl && state.aboutSectionEl) {
+            if(state.footerEl.getBoundingClientRect().y <= 90) {
+              state.headerEl.classList.remove("bg_dark_blue_custom");
+              state.headerEl.classList.add("bg_dark_custom");
+            } else if(state.projectsSectionEl.getBoundingClientRect().y <= 65) {
+              state.headerEl.classList.remove("bg_dark_custom");
+              state.headerEl.classList.add("bg_dark_blue_custom");
+            } else if(state.skillsSectionEl.getBoundingClientRect().y <= 65) {
+              state.headerEl.classList.remove("bg_dark_blue_custom");
+              state.headerEl.classList.add("bg_dark_custom");
+            } else if(state.aboutSectionEl.getBoundingClientRect().y <= 65) {
+              state.headerEl.classList.remove("bg_dark_custom");
+              state.headerEl.classList.add("bg_dark_blue_custom");
+            } else {
+              state.headerEl.classList.remove("bg_dark_blue_custom");
+              state.headerEl.classList.add("bg_dark_custom");
+            }
+          } else if (state.headerEl) {
+            state.headerEl.classList.remove("bg_dark_blue_custom");
+            state.headerEl.classList.add("bg_dark_custom");
+          }
+          this._ticking = false;
+        });
+        this._ticking = true;
       }
-    })
+    };
+    window.addEventListener('scroll', this._scrollHandler, { passive: true });
+  },
+  unmounted() {
+    if (this._scrollHandler) {
+      window.removeEventListener('scroll', this._scrollHandler);
+    }
+    if (this._animationFrameId) {
+      window.cancelAnimationFrame(this._animationFrameId);
+    }
   }
 }
 </script>

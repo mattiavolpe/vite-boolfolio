@@ -1,0 +1,3 @@
+## 2024-06-19 - Vue Global Scroll Listener Optimizations
+**Learning:** Global scroll event listeners in Vue components can cause memory leaks and layout thrashing. They need explicit cleanup, passive mode, and throttling. `getBoundingClientRect()` is faster than `getClientRects()[0]`, and global elements tracked in `state` require null-safety checks since they only exist when mounted.
+**Action:** Always throttle scroll listeners using `requestAnimationFrame`, add `{ passive: true }`, prefer `getBoundingClientRect()`, ensure null-safety on DOM nodes, and perform cleanup in the `unmounted()` hook. Non-reactive state (like timer IDs or listener references) should be attached to `this` inside lifecycle hooks rather than `data()`.

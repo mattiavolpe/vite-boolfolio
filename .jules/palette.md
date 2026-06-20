@@ -1,0 +1,3 @@
+## 2024-06-20 - Testing Transient States with Playwright
+**Learning:** Playwright can run into issues capturing transient states (like button loading text) if the simulated API delay blocks the UI thread or finishes too quickly. `threading.Thread` throws an exception because Playwright sync API methods are not thread-safe.
+**Action:** Do not use `threading.Thread` in Playwright verification scripts. Instead, simply use `time.sleep()` directly inside the route handler before calling `route.fulfill()`. During the actual test steps, use a short timeout or just a screenshot capture if the UI blocks synchronously during the mock.

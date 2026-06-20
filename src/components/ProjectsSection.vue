@@ -42,7 +42,8 @@ export default {
       <SectionTitle>PROJECTS OVERVIEW</SectionTitle>
       <h6 v-if="projects" class="text-center text-uppercase mb-5">These are my 3 newest projects. Click the button below to see all my projects</h6>
       <div v-if="projects" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-center g-3">
-        <div class="col" v-for="project in projects">
+        <!-- ⚡ Bolt: Added :key to v-for to optimize Virtual DOM patching and prevent unnecessary re-renders -->
+        <div class="col" v-for="project in projects" :key="project.slug">
           <router-link :to="{name: 'singleProject', params:{slug: project.slug}}">
             <div class="projectWrapper rounded-3 p-2 position-relative">
               <img v-if="project.image" :src="state.host + state.imagesPath + project.image" :alt="project.name + ' Image'">

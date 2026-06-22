@@ -13,10 +13,14 @@ export default {
       name: "",
       emailAddress: "",
       emailContent: "",
+      isSending: false,
     }
   },
   methods: {
     sendMail() {
+      if (this.isSending) return;
+      this.isSending = true;
+
       const data = {
         name: this.name,
         emailAddress: this.emailAddress,
@@ -27,9 +31,15 @@ export default {
       .post(state.host + state.contactEndpoint, data)
       .then(response => {
         console.log(response)
+        this.name = "";
+        this.emailAddress = "";
+        this.emailContent = "";
       })
       .catch(error => {
         console.error(error);
+      })
+      .finally(() => {
+        this.isSending = false;
       })
     },
   }
@@ -54,7 +64,15 @@ export default {
         <label for="emailContent" class="d-block text_accent_custom fw-bold">Your message</label>
         <textarea name="emailContent" id="emailContent" rows="10" class="w-100 rounded-3 p-2" placeholder="Type your message" v-model="emailContent"></textarea>
       </div>
-      <button class="bg_accent_custom border-0 text_dark_custom rounded fw-bold px-2 py-1" type="submit">Send e-mail</button>
+      <button class="bg_accent_custom border-0 text_dark_custom rounded fw-bold px-2 py-1" type="submit" :disabled="isSending">
+        <template v-if="isSending">
+          <font-awesome-icon icon="fa-regular fa-hourglass" class="me-2" />
+          Sending...
+        </template>
+        <template v-else>
+          Send e-mail
+        </template>
+      </button>
     </form>
   </div>
 </template>

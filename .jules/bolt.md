@@ -1,0 +1,3 @@
+## 2024-06-24 - Unthrottled Global Scroll Events
+**Learning:** Found an anti-pattern in `src/views/AppHome.vue` where a global `scroll` event listener was attached in `mounted()` without `{ passive: true }`, executing heavy DOM coordinate checks (`getClientRects()[0]`) synchronously without throttling, lacking null-safety for global elements, and missing an `unmounted()` cleanup hook, leading to memory leaks across navigations.
+**Action:** For global event listeners, always use `{ passive: true }`, prefer `getBoundingClientRect()`, explicitly throttle using `requestAnimationFrame` saved as a non-reactive instance variable, ensure null-safety on DOM element checks, and clean up in `unmounted()`.

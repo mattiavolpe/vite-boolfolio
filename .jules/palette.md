@@ -1,0 +1,3 @@
+## 2024-06-26 - Form Loading State Pattern
+**Learning:** For asynchronous form submissions in Vue components, clearing inputs within the `.then()` block and managing a disabled loading state using a `.finally()` block provides a clean, robust micro-UX pattern without requiring a global store or toast notification. Native `required` attributes coupled with visual `*` indicators nested inside `<span aria-hidden="true">` provide optimal accessibility.
+**Action:** Use this exact pattern (isSending boolean + finally block + aria-hidden required indicators) as the standard approach for simple async forms moving forward.

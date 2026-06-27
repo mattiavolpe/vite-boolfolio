@@ -1,0 +1,3 @@
+## 2024-06-27 - Vue Scroll Event Optimization
+**Learning:** Found a codebase-specific anti-pattern in Vue SPA routing: adding global 'scroll' event listeners in `mounted` without cleanup in `unmounted` causes memory and event listener leaks across route navigations. Additionally, using `getClientRects()[0]` during unthrottled scroll events is significantly slower than `getBoundingClientRect()`.
+**Action:** Always throttle scroll events with `requestAnimationFrame`, prefer `getBoundingClientRect()`, use the `{ passive: true }` option, and rigorously remove event listeners in the `unmounted` lifecycle hook.

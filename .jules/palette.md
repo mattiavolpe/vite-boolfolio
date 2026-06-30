@@ -1,0 +1,3 @@
+## 2025-01-20 - Adding Form UX Polish
+**Learning:** For a more accessible contact form, it's beneficial to add clear "required" indicators hidden from screen readers via `aria-hidden="true"` and an `isSending` state to prevent duplicate submissions and give users feedback. Also, using correct `type="email"` for email fields rather than `type="mail"` provides proper client-side validation, and using `type="text"` for standard text inputs avoids validation errors.
+**Action:** When implementing forms in Vue components, systematically include loading states for submit buttons and accessible required indicators for better micro-UX.

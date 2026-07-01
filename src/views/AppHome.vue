@@ -18,29 +18,46 @@ export default {
     }
   },
   mounted() {
-    window.addEventListener('scroll', () => {
-      if(this.$route.name === "home") {
-        if(state.footerEl.getClientRects()[0].y <= 90) {
-          state.headerEl.classList.remove("bg_dark_blue_custom");
-          state.headerEl.classList.add("bg_dark_custom");
-        } else if(state.projectsSectionEl.getClientRects()[0].y <= 65) {
-          state.headerEl.classList.remove("bg_dark_custom");
-          state.headerEl.classList.add("bg_dark_blue_custom");
-        } else if(state.skillsSectionEl.getClientRects()[0].y <= 65) {
-          state.headerEl.classList.remove("bg_dark_blue_custom");
-          state.headerEl.classList.add("bg_dark_custom");
-        } else if(state.aboutSectionEl.getClientRects()[0].y <= 65) {
-          state.headerEl.classList.remove("bg_dark_custom");
-          state.headerEl.classList.add("bg_dark_blue_custom");
-        } else {
+    // ⚡ Bolt: Throttled scroll listener using requestAnimationFrame and passive option to improve scroll performance
+    this._scrollHandler = () => {
+      if (this._rafId) return;
+
+      this._rafId = window.requestAnimationFrame(() => {
+        if(this.$route.name === "home" && state.headerEl) {
+          if(state.footerEl && state.footerEl.getBoundingClientRect().y <= 90) {
+            state.headerEl.classList.remove("bg_dark_blue_custom");
+            state.headerEl.classList.add("bg_dark_custom");
+          } else if(state.projectsSectionEl && state.projectsSectionEl.getBoundingClientRect().y <= 65) {
+            state.headerEl.classList.remove("bg_dark_custom");
+            state.headerEl.classList.add("bg_dark_blue_custom");
+          } else if(state.skillsSectionEl && state.skillsSectionEl.getBoundingClientRect().y <= 65) {
+            state.headerEl.classList.remove("bg_dark_blue_custom");
+            state.headerEl.classList.add("bg_dark_custom");
+          } else if(state.aboutSectionEl && state.aboutSectionEl.getBoundingClientRect().y <= 65) {
+            state.headerEl.classList.remove("bg_dark_custom");
+            state.headerEl.classList.add("bg_dark_blue_custom");
+          } else {
+            state.headerEl.classList.remove("bg_dark_blue_custom");
+            state.headerEl.classList.add("bg_dark_custom");
+          }
+        } else if(state.headerEl) {
           state.headerEl.classList.remove("bg_dark_blue_custom");
           state.headerEl.classList.add("bg_dark_custom");
         }
-      } else {
-        state.headerEl.classList.remove("bg_dark_blue_custom");
-        state.headerEl.classList.add("bg_dark_custom");
-      }
-    })
+        this._rafId = null;
+      });
+    };
+
+    window.addEventListener('scroll', this._scrollHandler, { passive: true });
+  },
+  unmounted() {
+    // ⚡ Bolt: Cleanup global event listener and pending animation frame to prevent memory leaks
+    if (this._scrollHandler) {
+      window.removeEventListener('scroll', this._scrollHandler);
+    }
+    if (this._rafId) {
+      window.cancelAnimationFrame(this._rafId);
+    }
   }
 }
 </script>

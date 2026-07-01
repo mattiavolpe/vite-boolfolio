@@ -1,0 +1,3 @@
+## 2024-07-01 - Contact Form Asynchronous Feedback
+**Learning:** For single-page Vue applications, submitting forms without immediate feedback leaves users wondering if their action registered. Adding a simple boolean loading state (`isSending`) that toggles button text/icons and disables the button provides clear visual confirmation.
+**Action:** Always implement a loading state for asynchronous operations (like Axios POST requests) and clear the input fields in the `.then()` block upon success. Use `.finally()` to reliably toggle the loading state back to false to avoid duplicating cleanup code.

@@ -1,0 +1,3 @@
+## $(date +%Y-%m-%d) - AppHome Scroll Event Listener Memory Leak and Performance Overhaul
+**Learning:** The window scroll event listener in `AppHome.vue` lacked a cleanup function in the `unmounted()` hook, causing a memory leak and executing code on inactive routes. Furthermore, it relied on synchronous `getClientRects()[0]`, which blocks the main thread, and lacked throttling.
+**Action:** Always clean up global event listeners inside `unmounted()`. Use `{ passive: true }` on global scroll events, use `getBoundingClientRect()` for efficient dimension retrieval, and throttle layout calculations using `requestAnimationFrame`. Additionally, ensure safety by conditionally checking if DOM elements exist before attempting to read their dimensions.

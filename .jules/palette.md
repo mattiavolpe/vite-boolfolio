@@ -1,0 +1,3 @@
+## 2024-07-09 - Accessible Loading States and Required Indicators
+**Learning:** Adding visual 'required' indicators (like an asterisk) directly into label text can create auditory clutter for screen reader users. Additionally, HTML5 `required` attributes combined with proper input types (`email` instead of `mail`) provide robust native validation before the JavaScript even attempts to submit the form.
+**Action:** When adding visual required indicators to form labels, wrap them in `<span aria-hidden="true">*</span>` to prevent them from being read aloud by screen readers, and ensure corresponding `required` attributes are present on the input elements themselves.

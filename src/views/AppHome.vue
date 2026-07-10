@@ -18,29 +18,51 @@ export default {
     }
   },
   mounted() {
-    window.addEventListener('scroll', () => {
-      if(this.$route.name === "home") {
-        if(state.footerEl.getClientRects()[0].y <= 90) {
+    this._ticking = false;
+    this._onScroll = () => {
+      if (!this._ticking) {
+        this._ticking = true;
+        this._rafId = requestAnimationFrame(() => {
+          this._handleScroll();
+          this._ticking = false;
+        });
+      }
+    };
+    // Use passive listener to prevent main thread blocking
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+  },
+  unmounted() {
+    // Cleanup scroll listener and pending animation frames
+    window.removeEventListener('scroll', this._onScroll);
+    if (this._rafId) {
+      cancelAnimationFrame(this._rafId);
+    }
+  },
+  methods: {
+    _handleScroll() {
+      // Use optional chaining and getBoundingClientRect() for efficiency and safety
+      if(this.$route.name === "home" && state.headerEl) {
+        if(state.footerEl?.getBoundingClientRect().y <= 90) {
           state.headerEl.classList.remove("bg_dark_blue_custom");
           state.headerEl.classList.add("bg_dark_custom");
-        } else if(state.projectsSectionEl.getClientRects()[0].y <= 65) {
+        } else if(state.projectsSectionEl?.getBoundingClientRect().y <= 65) {
           state.headerEl.classList.remove("bg_dark_custom");
           state.headerEl.classList.add("bg_dark_blue_custom");
-        } else if(state.skillsSectionEl.getClientRects()[0].y <= 65) {
+        } else if(state.skillsSectionEl?.getBoundingClientRect().y <= 65) {
           state.headerEl.classList.remove("bg_dark_blue_custom");
           state.headerEl.classList.add("bg_dark_custom");
-        } else if(state.aboutSectionEl.getClientRects()[0].y <= 65) {
+        } else if(state.aboutSectionEl?.getBoundingClientRect().y <= 65) {
           state.headerEl.classList.remove("bg_dark_custom");
           state.headerEl.classList.add("bg_dark_blue_custom");
         } else {
           state.headerEl.classList.remove("bg_dark_blue_custom");
           state.headerEl.classList.add("bg_dark_custom");
         }
-      } else {
+      } else if (state.headerEl) {
         state.headerEl.classList.remove("bg_dark_blue_custom");
         state.headerEl.classList.add("bg_dark_custom");
       }
-    })
+    }
   }
 }
 </script>

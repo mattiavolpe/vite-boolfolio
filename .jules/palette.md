@@ -1,0 +1,3 @@
+## 2024-07-13 - Improved Form UX and Accessibility
+**Learning:** Adding loading states and using proper semantic HTML5 input types dramatically improves the robustness of forms. Adding a visual required indicator and hiding it from screen readers via `aria-hidden="true"` is a strong a11y pattern.
+**Action:** Always check form elements for correct HTML5 input types (`type="email"` vs `type="mail"`), ensure required fields use native browser validation, and implement loading states on async form submissions to disable buttons and prevent double requests. Use `.finally()` to easily clean up loading states.

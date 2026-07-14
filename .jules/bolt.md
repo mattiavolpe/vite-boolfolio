@@ -1,0 +1,3 @@
+## 2024-05-24 - Vue Scroll Listener Performance
+**Learning:** Global scroll event listeners on `window` inside component `mounted()` hooks without `{ passive: true }` block the main thread. Accessing `getClientRects()[0]` is less efficient than `getBoundingClientRect()` and causes errors if elements are unmounted. Missing `unmounted()` cleanup for these listeners causes memory leaks.
+**Action:** Always use `{ passive: true }`, throttle with `requestAnimationFrame`, prefer `getBoundingClientRect()` with optional chaining, and explicitly remove event listeners and cancel animation frames in the `unmounted()` lifecycle hook.

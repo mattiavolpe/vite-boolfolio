@@ -42,7 +42,8 @@ export default {
         {{ project.name }}
     </SectionTitle>
     <div class="text-center py-4">
-      <img class="img-fluid" :src="state.host + state.imagesPath + project.image" :alt="`${project.name} image`">
+      <!-- OPTIMIZATION: Added loading="lazy" to defer offscreen images, improving initial page load time and bandwidth usage -->
+      <img class="img-fluid" :src="state.host + state.imagesPath + project.image" :alt="`${project.name} image`" loading="lazy">
     </div>
     <template v-if="project.repositoryUrl">
       <h3 class="text_accent_custom fw-bold">Repository URL:</h3>
@@ -59,7 +60,8 @@ export default {
       <ul class="fw-bold list-unstyled row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 g-3 justify-content-center"> 
         <li class="col" v-for="technology in project.technologies">
           <div class="technologyWrapper rounded-3 p-2">
-            <img :src="state.host + state.imagesPath + technology.logo" :alt="technology.name + ' Logo'">
+            <!-- OPTIMIZATION: Added loading="lazy" to defer offscreen images, improving initial page load time and bandwidth usage -->
+            <img :src="state.host + state.imagesPath + technology.logo" :alt="technology.name + ' Logo'" loading="lazy">
             <p class="mb-0 mt-2 fw-normal">{{ technology.name }}</p>
           </div>
         </li>

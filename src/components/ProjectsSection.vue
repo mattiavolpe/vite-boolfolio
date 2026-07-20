@@ -45,8 +45,9 @@ export default {
         <div class="col" v-for="project in projects">
           <router-link :to="{name: 'singleProject', params:{slug: project.slug}}">
             <div class="projectWrapper rounded-3 p-2 position-relative">
-              <img v-if="project.image" :src="state.host + state.imagesPath + project.image" :alt="project.name + ' Image'">
-              <img v-else :src="state.host + state.imagesPath + 'uploads/image_not_available.png'" alt="Image not found placeholder" style="aspect-ratio: 405 / 205;">
+              <!-- OPTIMIZATION: Added loading="lazy" to defer offscreen images, improving initial page load time and bandwidth usage -->
+              <img v-if="project.image" :src="state.host + state.imagesPath + project.image" :alt="project.name + ' Image'" loading="lazy">
+              <img v-else :src="state.host + state.imagesPath + 'uploads/image_not_available.png'" alt="Image not found placeholder" style="aspect-ratio: 405 / 205;" loading="lazy">
               <div class="infos">
                 <p class="text_dark_custom fw-bold text-uppercase text-center">{{ project.name }}</p>
                 <button class="singleProjectLink text-decoration-none py-2 px-3 rounded bg_dark_custom text_accent_custom fw-bold">See details</button>

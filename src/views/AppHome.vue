@@ -18,29 +18,50 @@ export default {
     }
   },
   mounted() {
-    window.addEventListener('scroll', () => {
+    // ⚡ Bolt: Throttling scroll event with requestAnimationFrame and { passive: true } for better performance
+    let scrollTicking = false;
+    this.scrollHandler = () => {
+      if (!scrollTicking) {
+        window.requestAnimationFrame(() => {
+          this.handleScroll();
+          scrollTicking = false;
+        });
+        scrollTicking = true;
+      }
+    };
+    window.addEventListener('scroll', this.scrollHandler, { passive: true });
+  },
+  unmounted() {
+    // ⚡ Bolt: Clean up event listener to prevent memory leaks
+    if (this.scrollHandler) {
+      window.removeEventListener('scroll', this.scrollHandler);
+    }
+  },
+  methods: {
+    handleScroll() {
+      // ⚡ Bolt: Using getBoundingClientRect() and optional chaining for safer and faster layout reads
       if(this.$route.name === "home") {
-        if(state.footerEl.getClientRects()[0].y <= 90) {
-          state.headerEl.classList.remove("bg_dark_blue_custom");
-          state.headerEl.classList.add("bg_dark_custom");
-        } else if(state.projectsSectionEl.getClientRects()[0].y <= 65) {
-          state.headerEl.classList.remove("bg_dark_custom");
-          state.headerEl.classList.add("bg_dark_blue_custom");
-        } else if(state.skillsSectionEl.getClientRects()[0].y <= 65) {
-          state.headerEl.classList.remove("bg_dark_blue_custom");
-          state.headerEl.classList.add("bg_dark_custom");
-        } else if(state.aboutSectionEl.getClientRects()[0].y <= 65) {
-          state.headerEl.classList.remove("bg_dark_custom");
-          state.headerEl.classList.add("bg_dark_blue_custom");
+        if(state.footerEl?.getBoundingClientRect().y <= 90) {
+          state.headerEl?.classList.remove("bg_dark_blue_custom");
+          state.headerEl?.classList.add("bg_dark_custom");
+        } else if(state.projectsSectionEl?.getBoundingClientRect().y <= 65) {
+          state.headerEl?.classList.remove("bg_dark_custom");
+          state.headerEl?.classList.add("bg_dark_blue_custom");
+        } else if(state.skillsSectionEl?.getBoundingClientRect().y <= 65) {
+          state.headerEl?.classList.remove("bg_dark_blue_custom");
+          state.headerEl?.classList.add("bg_dark_custom");
+        } else if(state.aboutSectionEl?.getBoundingClientRect().y <= 65) {
+          state.headerEl?.classList.remove("bg_dark_custom");
+          state.headerEl?.classList.add("bg_dark_blue_custom");
         } else {
-          state.headerEl.classList.remove("bg_dark_blue_custom");
-          state.headerEl.classList.add("bg_dark_custom");
+          state.headerEl?.classList.remove("bg_dark_blue_custom");
+          state.headerEl?.classList.add("bg_dark_custom");
         }
       } else {
-        state.headerEl.classList.remove("bg_dark_blue_custom");
-        state.headerEl.classList.add("bg_dark_custom");
+        state.headerEl?.classList.remove("bg_dark_blue_custom");
+        state.headerEl?.classList.add("bg_dark_custom");
       }
-    })
+    }
   }
 }
 </script>

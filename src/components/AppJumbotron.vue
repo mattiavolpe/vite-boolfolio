@@ -59,7 +59,8 @@ export default {
               <img class="img-fluid" :src="state.getImageUrl('avatar_optimized.png')" alt="Mattia Volpe's Avatar">
             </div>
             <div id="logos" v-if="state.technologies.length > 0">
-              <div class="logoWrapper" v-for="n in 3">
+              <!-- ⚡ Bolt: Added :key="n" for optimal DOM patching and rendering performance -->
+              <div class="logoWrapper" v-for="n in 3" :key="n">
                 <img :src="state.host + state.imagesPath + state.technologiesToShow[n - 1].logo" :alt="state.technologiesToShow[n - 1].name + ' Logo'">
               </div>
             </div>

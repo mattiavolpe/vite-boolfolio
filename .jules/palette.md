@@ -1,0 +1,3 @@
+## 2024-05-24 - Form Submission UX and Validation
+**Learning:** The contact form lacked native HTML5 validation and feedback during asynchronous submission, which degrades both standard usability and screen reader accessibility. Adding loading states via `.finally()` simplifies cleanup, and `role="status"` is required for dynamic success messages to be announced properly by screen readers.
+**Action:** Always verify form inputs use correct types (`email`, `text`), include `required` attributes, manage a disabled loading state during submissions, and wrap visual indicators like `*` in `<span aria-hidden="true">` to prevent redundant audio clutter.

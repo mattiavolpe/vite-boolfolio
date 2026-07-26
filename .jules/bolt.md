@@ -1,0 +1,3 @@
+## 2024-07-26 - Global Scroll Listener Anti-Pattern
+**Learning:** Found a global scroll listener (`window.addEventListener('scroll')`) in `AppHome.vue` that wasn't being cleaned up on route change, causing memory leaks and null reference errors because it tried accessing elements on other pages without checking if they exist. It was also unthrottled, meaning it blocked the main thread.
+**Action:** When adding global event listeners (like scroll or resize) inside a Vue component, always use `{ passive: true }`, throttle via `requestAnimationFrame`, use `getBoundingClientRect()` instead of `getClientRects()[0]`, handle null checks for DOM elements (e.g. `state.footerEl?.`), and always clean up the listener in `unmounted()`.

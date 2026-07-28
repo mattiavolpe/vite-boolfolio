@@ -1,0 +1,3 @@
+## 2024-05-24 - Vue Global Scroll Listener Throttling
+**Learning:** Attaching unthrottled `scroll` event listeners to `window` in a Vue component's `mounted` hook without proper cleanup or passive flags causes significant layout thrashing and memory leaks, especially when repeatedly querying `getClientRects()` for dynamic styling.
+**Action:** Always use `requestAnimationFrame` for throttling, add `{ passive: true }` to the listener, replace `getClientRects()[0]` with `getBoundingClientRect()`, and explicitly remove the listener and cancel the animation frame in the `unmounted()` hook. Use optional chaining for DOM reads tied to external state objects.

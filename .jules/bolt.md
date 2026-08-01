@@ -1,0 +1,3 @@
+## 2024-05-25 - Global Scroll Listener Memory Leak & Thrashing
+**Learning:** The codebase stores global DOM elements in a reactive `state` object (e.g., `state.footerEl`) and accesses them via unthrottled `window` scroll listeners in components like `AppHome`. Failing to clean these up causes layout thrashing and severe memory leaks when navigating away, as the event keeps firing and attempting to access nullified or stale `state` properties.
+**Action:** Always throttle scroll listeners using `requestAnimationFrame`, use `{ passive: true }`, implement optional chaining (`?.`) when accessing DOM nodes in `state`, and strictly remove the listeners in the `unmounted()` hook.

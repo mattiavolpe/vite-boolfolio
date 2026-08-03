@@ -1,0 +1,3 @@
+## 2024-05-18 - Global scroll event optimizations
+**Learning:** This codebase uses a global scroll event listener in `AppHome.vue` that references global state properties which can become null, and it lacks cleanup which causes memory leaks when navigating between routes. Additionally, `getClientRects()[0]` is a slow way to get the rect compared to `getBoundingClientRect()`.
+**Action:** When working with Vue router and global event listeners, always use `requestAnimationFrame` for throttling, `getBoundingClientRect()` for efficiency, optional chaining for safety against unrendered elements in state, `{ passive: true }` for scroll listeners, and ensure listeners are removed in `unmounted()`.

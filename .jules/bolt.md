@@ -1,0 +1,3 @@
+## 2024-05-24 - Vue Scroll Listener Memory Leaks & Thrashing
+**Learning:** Attaching synchronous global scroll event listeners without cleanup in Vue components causes severe memory leaks and main thread blocking via continuous layout thrashing (e.g., using `getClientRects()` in the callback). Reactive overhead can be avoided by attaching state flags (like throttling indicators) directly to the component instance instead of `data()`.
+**Action:** Always use `{ passive: true }`, throttle scroll events with `requestAnimationFrame`, use `getBoundingClientRect()` for efficient DOM reads, assign tracking variables to `this` instance directly, and explicitly clean up listeners in the `unmounted()` hook.

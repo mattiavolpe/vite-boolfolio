@@ -1,0 +1,3 @@
+## 2024-08-05 - Add form validation and loading states to Contact form
+**Learning:** Incorrect HTML5 input types (`type="mail"`) cause screen readers to treat inputs as standard text boxes rather than semantic email inputs, bypassing native browser validation and reducing accessibility. A lack of loading state feedback can cause users to click multiple times during async operations.
+**Action:** Use `type="email"` for email inputs, add native `required` attributes for robust validation, and visually/programmatically disable submit buttons with a loading indicator during async submission. Use `role="status"` on success/error messages so they are dynamically announced.

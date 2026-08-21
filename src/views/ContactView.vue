@@ -13,10 +13,14 @@ export default {
       name: "",
       emailAddress: "",
       emailContent: "",
+      isSending: false,
+      submitStatus: null,
     }
   },
   methods: {
     sendMail() {
+      this.isSending = true;
+      this.submitStatus = null;
       const data = {
         name: this.name,
         emailAddress: this.emailAddress,
@@ -26,10 +30,18 @@ export default {
       axios
       .post(state.host + state.contactEndpoint, data)
       .then(response => {
-        console.log(response)
+        console.log(response);
+        this.submitStatus = 'success';
+        this.name = "";
+        this.emailAddress = "";
+        this.emailContent = "";
       })
       .catch(error => {
         console.error(error);
+        this.submitStatus = 'error';
+      })
+      .finally(() => {
+        this.isSending = false;
       })
     },
   }
@@ -44,17 +56,29 @@ export default {
     <form @submit.prevent="sendMail()">
       <div class="mb-3">
         <label for="name" class="d-block text_accent_custom fw-bold">Full name</label>
-        <input type="mail" id="name" name="name" class="w-100 rounded-3 p-2" placeholder="Type your full name" v-model="name">
+        <input type="text" id="name" name="name" class="w-100 rounded-3 p-2" placeholder="Type your full name" v-model="name" required>
       </div>
       <div class="mb-3">
         <label for="emailAddress" class="d-block text_accent_custom fw-bold">E-mail address</label>
-        <input type="mail" id="emailAddress" name="emailAddress" class="w-100 rounded-3 p-2" placeholder="Type your e-mail address" v-model="emailAddress">
+        <input type="email" id="emailAddress" name="emailAddress" class="w-100 rounded-3 p-2" placeholder="Type your e-mail address" v-model="emailAddress" required>
       </div>
       <div class="mb-3">
         <label for="emailContent" class="d-block text_accent_custom fw-bold">Your message</label>
-        <textarea name="emailContent" id="emailContent" rows="10" class="w-100 rounded-3 p-2" placeholder="Type your message" v-model="emailContent"></textarea>
+        <textarea name="emailContent" id="emailContent" rows="10" class="w-100 rounded-3 p-2" placeholder="Type your message" v-model="emailContent" required></textarea>
       </div>
-      <button class="bg_accent_custom border-0 text_dark_custom rounded fw-bold px-2 py-1" type="submit">Send e-mail</button>
+      <button class="bg_accent_custom border-0 text_dark_custom rounded fw-bold px-2 py-1 d-inline-flex align-items-center gap-2" type="submit" :disabled="isSending" :aria-disabled="isSending">
+        <font-awesome-icon v-if="isSending" icon="fa-solid fa-spinner" spin />
+        <span>{{ isSending ? 'Sending...' : 'Send e-mail' }}</span>
+      </button>
+
+      <div v-if="submitStatus" class="mt-3" role="status" aria-live="polite">
+        <div v-if="submitStatus === 'success'" class="text-success fw-bold p-2 bg-success bg-opacity-10 rounded">
+          Message sent successfully! I will get back to you soon.
+        </div>
+        <div v-if="submitStatus === 'error'" class="text-danger fw-bold p-2 bg-danger bg-opacity-10 rounded">
+          Failed to send message. Please try again later.
+        </div>
+      </div>
     </form>
   </div>
 </template>

@@ -1,0 +1,3 @@
+## 2024-05-14 - Invalid Form Input Types Break Mobile Keyboards and Async Forms Need Aria-Live
+**Learning:** Using `type="mail"` (which is invalid HTML, should be `email`) defaults to a standard text input on mobile devices, denying the user the optimized email keyboard (with '@' and '.com'). Furthermore, async form submissions without an `aria-live="polite"` feedback message leave screen reader users unaware of the submission result, and missing `required` attributes fail to provide basic browser validation.
+**Action:** Always validate that input types are correct (`email` vs `mail`), use `aria-live="polite"` for dynamic success/error messages after async operations, and ensure `required` indicators are present.

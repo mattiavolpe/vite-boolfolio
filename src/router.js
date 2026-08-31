@@ -1,37 +1,34 @@
 import { createRouter, createWebHistory } from "vue-router";
-import AppHome from "./views/AppHome.vue";
-import ProjectsView from "./views/ProjectsView.vue"
-import SingleProject from "./views/SingleProject.vue";
-import ContactView from "./views/ContactView.vue";
-import PageNotFound from "./views/PageNotFound.vue";
 
+// ⚡ Bolt: Implemented route-level code splitting using dynamic imports
+// to reduce the initial bundle size.
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
       path: "/",
       name: "home",
-      component: AppHome,
+      component: () => import("./views/AppHome.vue"),
     },
     {
       path: "/projects",
       name: "projects",
-      component: ProjectsView,
+      component: () => import("./views/ProjectsView.vue"),
     },
     {
       path: "/project/:slug",
       name: "singleProject",
-      component: SingleProject,
+      component: () => import("./views/SingleProject.vue"),
     },
     {
       path: "/contact",
       name: "contact",
-      component: ContactView,
+      component: () => import("./views/ContactView.vue"),
     },
     {
       path: "/:pathMatch(.*)*",
       name: "page404",
-      component: PageNotFound,
+      component: () => import("./views/PageNotFound.vue"),
     },
   ],
   scrollBehavior() {

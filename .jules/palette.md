@@ -1,0 +1,3 @@
+## 2024-05-23 - Form UX improvements
+**Learning:** Using incorrect input types like `type="mail"` instead of `type="email"` bypasses native browser email validation. Missing required attributes and missing visual indicators for required fields lead to poor UX when submitting forms. Missing loading and feedback states on asynchronous form submissions leaves users confused about the result of their action.
+**Action:** Always ensure the correct semantic `type` is used for form inputs (e.g. `type="email"`). Add visual indicators (e.g., asterisks) for required fields, use the `required` attribute, and always provide loading, success, and error feedback to users for form submissions.

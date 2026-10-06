@@ -1,9 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
-import AppHome from "./views/AppHome.vue";
-import ProjectsView from "./views/ProjectsView.vue"
-import SingleProject from "./views/SingleProject.vue";
-import ContactView from "./views/ContactView.vue";
-import PageNotFound from "./views/PageNotFound.vue";
+
+// Performance Optimization: Use dynamic imports for route components
+// This enables Vite route-level code splitting, reducing the initial bundle size
+// by only loading these components when their respective routes are visited.
+const AppHome = () => import("./views/AppHome.vue");
+const ProjectsView = () => import("./views/ProjectsView.vue");
+const SingleProject = () => import("./views/SingleProject.vue");
+const ContactView = () => import("./views/ContactView.vue");
+const PageNotFound = () => import("./views/PageNotFound.vue");
 
 const router = createRouter({
   history: createWebHistory(),

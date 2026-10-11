@@ -1,9 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import AppHome from "./views/AppHome.vue";
-import ProjectsView from "./views/ProjectsView.vue"
-import SingleProject from "./views/SingleProject.vue";
-import ContactView from "./views/ContactView.vue";
-import PageNotFound from "./views/PageNotFound.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -11,27 +6,32 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: AppHome,
+      // Route-level code splitting: Dynamic import reduces initial bundle size
+      component: () => import("./views/AppHome.vue"),
     },
     {
       path: "/projects",
       name: "projects",
-      component: ProjectsView,
+      // Route-level code splitting: Dynamic import reduces initial bundle size
+      component: () => import("./views/ProjectsView.vue"),
     },
     {
       path: "/project/:slug",
       name: "singleProject",
-      component: SingleProject,
+      // Route-level code splitting: Dynamic import reduces initial bundle size
+      component: () => import("./views/SingleProject.vue"),
     },
     {
       path: "/contact",
       name: "contact",
-      component: ContactView,
+      // Route-level code splitting: Dynamic import reduces initial bundle size
+      component: () => import("./views/ContactView.vue"),
     },
     {
       path: "/:pathMatch(.*)*",
       name: "page404",
-      component: PageNotFound,
+      // Route-level code splitting: Dynamic import reduces initial bundle size
+      component: () => import("./views/PageNotFound.vue"),
     },
   ],
   scrollBehavior() {
